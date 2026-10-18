@@ -47,7 +47,7 @@
     "build": "tsc"
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "*"
+    "@deepseek-ai/cordis": ">=4.0.0"
   },
   "devDependencies": {
     "typescript": "^5.6.0"
@@ -55,6 +55,7 @@
   "keywords": [
     "deepseek-harness",
     "dsh",
+    "dsh-plugin",
     "cordis",
     "claude-code-desktop",
     "ui-plugin",

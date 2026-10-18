@@ -307,6 +307,22 @@
 
     var domObserver = null;
 
+    function getStoredTheme() {
+      try {
+        return localStorage.getItem('cc-desktop-theme') || 'dark';
+      } catch (e) {
+        return 'dark';
+      }
+    }
+
+    function setStoredTheme(theme) {
+      try {
+        localStorage.setItem('cc-desktop-theme', theme);
+      } catch (e) {
+        // Safe fallback in restricted environments
+      }
+    }
+
     function apply(ctx) {
       if (typeof window === 'undefined' || typeof document === 'undefined') return;
       mountClaudeDesktopUI();
@@ -320,6 +336,17 @@
     }
 
     function mountClaudeDesktopUI() {
+      if (typeof document === 'undefined') return;
+
+      if (!document.body) {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', mountClaudeDesktopUI);
+        } else {
+          setTimeout(mountClaudeDesktopUI, 40);
+        }
+        return;
+      }
+
       if (document.getElementById('cc-desktop-styles')) return;
 
       var fontLink = document.createElement('link');
@@ -327,15 +354,21 @@
       fontLink.rel = 'stylesheet';
       fontLink.href =
         'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap';
-      document.head.appendChild(fontLink);
+      if (document.head) {
+        document.head.appendChild(fontLink);
+      }
 
       var styleTag = document.createElement('style');
       styleTag.id = 'cc-desktop-styles';
       styleTag.textContent = CLAUDE_DESKTOP_CSS;
-      document.head.appendChild(styleTag);
+      if (document.head) {
+        document.head.appendChild(styleTag);
+      }
 
-      var savedTheme = localStorage.getItem('cc-desktop-theme') || 'dark';
-      document.documentElement.setAttribute('data-claude-theme', savedTheme);
+      var savedTheme = getStoredTheme();
+      if (document.documentElement) {
+        document.documentElement.setAttribute('data-claude-theme', savedTheme);
+      }
 
       var titlebar = document.createElement('header');
       titlebar.id = 'cc-desktop-titlebar';
@@ -398,7 +431,7 @@
       }
 
       window.addEventListener('keydown', function (ev) {
-        if (ev.shiftKey && ev.key === 'Tab') {
+        if (ev && ev.shiftKey && ev.key === 'Tab') {
           ev.preventDefault();
           togglePermissionMode();
         }
@@ -420,10 +453,12 @@
       var themeSwitch = document.getElementById('cc-theme-switch');
       if (themeSwitch) {
         themeSwitch.addEventListener('click', function () {
-          var current = document.documentElement.getAttribute('data-claude-theme');
+          var current = document.documentElement ? document.documentElement.getAttribute('data-claude-theme') : 'dark';
           var next = current === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-claude-theme', next);
-          localStorage.setItem('cc-desktop-theme', next);
+          if (document.documentElement) {
+            document.documentElement.setAttribute('data-claude-theme', next);
+          }
+          setStoredTheme(next);
         });
       }
 
@@ -435,7 +470,9 @@
       if (drawerToggle && drawer) {
         drawerToggle.addEventListener('click', function () {
           var isOpen = drawer.classList.toggle('open');
-          document.body.style.marginRight = isOpen ? '460px' : '0px';
+          if (document.body) {
+            document.body.style.marginRight = isOpen ? '460px' : '0px';
+          }
           if (isOpen && iframe && iframe.src === 'about:blank' && urlInput) {
             iframe.src = urlInput.value;
           }
@@ -450,32 +487,41 @@
 
       if (urlInput && iframe) {
         urlInput.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') {
+          if (e && e.key === 'Enter') {
             iframe.src = urlInput.value;
           }
         });
       }
 
-      domObserver = new MutationObserver(function (mutations) {
-        for (var i = 0; i < mutations.length; i++) {
-          var m = mutations[i];
-          for (var j = 0; j < m.addedNodes.length; j++) {
-            var node = m.addedNodes[j];
-            if (node instanceof HTMLElement) {
-              var toolBlocks = node.querySelectorAll('pre, [class*="tool"]');
-              for (var k = 0; k < toolBlocks.length; k++) {
-                toolBlocks[k].classList.add('cc-upgraded-tool-card');
+      try {
+        domObserver = new MutationObserver(function (mutations) {
+          for (var i = 0; i < mutations.length; i++) {
+            var m = mutations[i];
+            if (!m || !m.addedNodes) continue;
+            for (var j = 0; j < m.addedNodes.length; j++) {
+              var node = m.addedNodes[j];
+              if (node && node.nodeType === 1 && typeof node.querySelectorAll === 'function') {
+                var toolBlocks = node.querySelectorAll('pre, [class*="tool"]');
+                for (var k = 0; k < toolBlocks.length; k++) {
+                  toolBlocks[k].classList.add('cc-upgraded-tool-card');
+                }
               }
             }
           }
+        });
+        if (document.body) {
+          domObserver.observe(document.body, { childList: true, subtree: true });
         }
-      });
-      domObserver.observe(document.body, { childList: true, subtree: true });
+      } catch (err) {
+        // MutationObserver fallback
+      }
     }
 
     function unmountClaudeDesktopUI() {
       if (domObserver) {
-        domObserver.disconnect();
+        try {
+          domObserver.disconnect();
+        } catch (e) {}
         domObserver = null;
       }
       var s = document.getElementById('cc-desktop-styles');
@@ -486,8 +532,10 @@
       if (t) t.remove();
       var d = document.getElementById('cc-desktop-drawer');
       if (d) d.remove();
-      document.body.style.marginRight = '0px';
-      document.body.style.paddingTop = '0px';
+      if (document.body) {
+        document.body.style.marginRight = '0px';
+        document.body.style.paddingTop = '0px';
+      }
     }
 
     exports.name = 'dsh-claude-code-desktop-client';
