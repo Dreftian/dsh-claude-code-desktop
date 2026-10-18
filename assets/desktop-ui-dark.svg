@@ -1,22 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" fill="none">
   <defs>
-    <!-- Dark Mode Shadows -->
-    <filter id="win-shadow" x="-3%" y="-2%" width="106%" height="108%">
+    <!-- Dark Mode Shadows & Glows -->
+    <filter id="win-shadow-native" x="-3%" y="-2%" width="106%" height="108%">
       <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000000" flood-opacity="0.6"/>
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.3"/>
     </filter>
 
-    <filter id="card-elevation" x="-5%" y="-5%" width="110%" height="115%">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.35"/>
+    <filter id="composer-shadow" x="-5%" y="-10%" width="110%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#D97757" flood-opacity="0.25"/>
     </filter>
 
-    <filter id="terracotta-glow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#D97757" flood-opacity="0.4"/>
+    <filter id="star-glow-hero" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
 
-    <!-- Clip path for rounded window -->
-    <clipPath id="window-clip">
-      <rect x="12" y="12" width="976" height="536" rx="14"/>
+    <!-- Clip path for the window -->
+    <clipPath id="win-clip-native">
+      <rect x="10" y="10" width="980" height="540" rx="10"/>
     </clipPath>
   </defs>
 
@@ -26,355 +28,334 @@
     .font-mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
   </style>
 
-  <!-- Outside backdrop subtle gradient -->
+  <!-- Outside Canvas Backdrop -->
   <rect width="1000" height="560" fill="#10100F"/>
 
-  <!-- Main Window Frame with Drop Shadow -->
-  <g filter="url(#win-shadow)">
-    <!-- Base Window Body -->
-    <rect x="12" y="12" width="976" height="536" rx="14" fill="#191918" stroke="#353430" stroke-width="1.2"/>
+  <!-- Main Window Frame (Shadowed Container) -->
+  <g filter="url(#win-shadow-native)">
+    <rect x="10" y="10" width="980" height="540" rx="10" fill="#191918" stroke="#353430" stroke-width="1.2"/>
   </g>
 
-  <!-- Cliped Content Container -->
-  <g clip-path="url(#window-clip)">
+  <!-- Window Contents (Clipped) -->
+  <g clip-path="url(#win-clip-native)">
 
-    <!-- ==================== TITLEBAR ==================== -->
-    <rect x="12" y="12" width="976" height="46" fill="#161514" stroke="#2B2A27" stroke-width="1"/>
+    <!-- ========================================================================= -->
+    <!-- SLIM INTEGRATED TOP TITLEBAR -->
+    <!-- ========================================================================= -->
+    <rect x="10" y="10" width="980" height="42" fill="#161514" stroke="#2B2A27" stroke-width="1"/>
 
-    <!-- Window Dots (macOS style) -->
-    <circle cx="32" cy="35" r="5.5" fill="#ED6A5E"/>
-    <circle cx="49" cy="35" r="5.5" fill="#F5BF4F"/>
-    <circle cx="66" cy="35" r="5.5" fill="#62C554"/>
-
-    <!-- Claude Code Logo & Name -->
-    <g transform="translate(90, 24)">
-      <!-- ✻ Star Icon -->
-      <g transform="translate(6, 11) scale(0.65)" fill="#D97757">
-        <rect x="-2" y="-14" width="4" height="28" rx="2"/>
-        <rect x="-14" y="-2" width="28" height="4" rx="2"/>
-        <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(45)"/>
-        <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(-45)"/>
-      </g>
-      <text x="18" y="15" class="font-ui" font-size="13" font-weight="700" fill="#FAF9F5" letter-spacing="-0.01em">Claude Code</text>
-    </g>
-
-    <!-- Workspace Chip -->
-    <g transform="translate(202, 23)">
-      <rect width="112" height="24" rx="12" fill="#242321" stroke="#383632" stroke-width="1"/>
+    <!-- Left breadcrumb / environment chip -->
+    <g transform="translate(24, 18)">
+      <rect width="148" height="24" rx="6" fill="#21201E" stroke="#33312D" stroke-width="0.8"/>
       <circle cx="12" cy="12" r="3" fill="#D97757"/>
-      <text x="22" y="16" class="font-mono" font-size="10.5" fill="#B4B0A5">dsh · workspace</text>
+      <text x="22" y="16" class="font-mono" font-size="10.5" fill="#B4B0A5">dsh · DeepSeek GUI</text>
     </g>
 
+    <!-- Center Integrated Controls -->
     <!-- Segmented Control [Chat | Code] -->
-    <g transform="translate(330, 22)">
-      <rect width="138" height="26" rx="6" fill="#121211" stroke="#2F2E2B" stroke-width="1"/>
-      <!-- Inactive Chat tab -->
-      <text x="34" y="17" class="font-ui" font-size="11" font-weight="500" fill="#7D7971" text-anchor="middle">Chat</text>
-      <!-- Active Code tab -->
-      <rect x="70" y="2" width="65" height="22" rx="5" fill="#282725" stroke="#42403B" stroke-width="0.8"/>
-      <text x="102" y="17" class="font-ui" font-size="11" font-weight="700" fill="#FAF9F5" text-anchor="middle">Code</text>
+    <g transform="translate(260, 18)">
+      <rect width="136" height="26" rx="6" fill="#121211" stroke="#2C2B28" stroke-width="1"/>
+      <rect x="2" y="2" width="64" height="22" rx="5" fill="#282725" stroke="#3F3D38" stroke-width="0.8"/>
+      <text x="34" y="17" class="font-ui" font-size="11" font-weight="700" fill="#FAF9F5" text-anchor="middle">Chat</text>
+      <text x="100" y="17" class="font-ui" font-size="11" font-weight="500" fill="#7D7971" text-anchor="middle">Code</text>
     </g>
 
-    <!-- Action Pills (Right Side) -->
-    <!-- Pill 1: Plan Mode -->
-    <g transform="translate(568, 23)">
+    <!-- Action Pill 1: Plan Mode -->
+    <g transform="translate(412, 18)">
       <rect width="124" height="25" rx="12.5" fill="#D97757" fill-opacity="0.14" stroke="#D97757" stroke-width="1.2"/>
       <text x="12" y="16" class="font-ui" font-size="11">🛡️</text>
       <text x="30" y="16" class="font-ui" font-size="10.5" font-weight="700" fill="#F4957A">Plan Mode</text>
       <rect x="94" y="5" width="22" height="15" rx="3" fill="#3D2820"/>
-      <text x="105" y="16" class="font-mono" font-size="8.5" font-weight="600" fill="#D97757" text-anchor="middle">⌥P</text>
+      <text x="105" y="16" class="font-mono" font-size="8.5" font-weight="700" fill="#D97757" text-anchor="middle">⌥P</text>
     </g>
 
-    <!-- Pill 2: App Preview -->
-    <g transform="translate(700, 23)">
-      <rect width="112" height="25" rx="12.5" fill="#242321" stroke="#3D3B37" stroke-width="1"/>
+    <!-- Action Pill 2: App Preview -->
+    <g transform="translate(548, 18)">
+      <rect width="116" height="25" rx="12.5" fill="#21201E" stroke="#383632" stroke-width="1"/>
       <text x="10" y="16" class="font-ui" font-size="11">⚡</text>
       <text x="28" y="16" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5">App Preview</text>
-      <circle cx="98" cy="12.5" r="3" fill="#52AD68"/>
+      <circle cx="102" cy="12.5" r="3" fill="#52AD68"/>
     </g>
 
-    <!-- Pill 3: Tema Toggle -->
-    <g transform="translate(820, 23)">
-      <rect width="78" height="25" rx="12.5" fill="#242321" stroke="#3D3B37" stroke-width="1"/>
+    <!-- Action Pill 3: Tema Toggle -->
+    <g transform="translate(676, 18)">
+      <rect width="78" height="25" rx="12.5" fill="#21201E" stroke="#383632" stroke-width="1"/>
       <text x="10" y="16" class="font-ui" font-size="11">◐</text>
       <text x="28" y="16" class="font-ui" font-size="10.5" font-weight="500" fill="#C4C0B5">Tema</text>
     </g>
 
-    <!-- User Profile Icon -->
-    <g transform="translate(910, 23)">
-      <circle cx="12" cy="12" r="12" fill="#2D2C29" stroke="#44423E" stroke-width="1"/>
-      <text x="12" y="16" class="font-ui" font-size="10.5" font-weight="600" fill="#E8967D" text-anchor="middle">DS</text>
+    <!-- WINDOWS NATIVE WINDOW CONTROLS (Top Right: - □ ✕) -->
+    <g transform="translate(860, 10)">
+      <!-- Minimize button -->
+      <g transform="translate(0, 0)">
+        <rect width="40" height="32" fill="transparent"/>
+        <line x1="14" y1="21" x2="26" y2="21" stroke="#A39F95" stroke-width="1.2"/>
+      </g>
+      <!-- Maximize button -->
+      <g transform="translate(40, 0)">
+        <rect width="40" height="32" fill="transparent"/>
+        <rect x="15" y="11" width="10" height="10" fill="none" stroke="#A39F95" stroke-width="1.2"/>
+      </g>
+      <!-- Close button (with subtle hover feel) -->
+      <g transform="translate(80, 0)">
+        <rect width="40" height="32" fill="transparent"/>
+        <line x1="15" y1="11" x2="25" y2="21" stroke="#A39F95" stroke-width="1.2"/>
+        <line x1="25" y1="11" x2="15" y2="21" stroke="#A39F95" stroke-width="1.2"/>
+      </g>
     </g>
 
 
-    <!-- ==================== LEFT SIDEBAR ==================== -->
-    <g transform="translate(12, 58)">
-      <rect width="158" height="490" fill="#141413" stroke="#252422" stroke-width="1"/>
+    <!-- ========================================================================= -->
+    <!-- LEFT SIDEBAR -->
+    <!-- ========================================================================= -->
+    <g transform="translate(10, 52)">
+      <rect width="180" height="498" fill="#141413" stroke="#252422" stroke-width="1"/>
+
+      <!-- SIDEBAR TOP: Terracotta Star, Title 'Claude Code', Edition Badge 'Desktop' -->
+      <g transform="translate(16, 16)">
+        <!-- Terracotta Star ✻ -->
+        <g transform="translate(10, 12) scale(0.7)" fill="#D97757">
+          <rect x="-2" y="-14" width="4" height="28" rx="2"/>
+          <rect x="-14" y="-2" width="28" height="4" rx="2"/>
+          <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(45)"/>
+          <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(-45)"/>
+        </g>
+        <!-- Title 'Claude Code' -->
+        <text x="24" y="17" class="font-ui" font-size="14" font-weight="700" fill="#FAF9F5" letter-spacing="-0.01em">
+          Claude Code
+        </text>
+        <!-- Edition Badge 'Desktop' -->
+        <g transform="translate(108, 3)">
+          <rect width="44" height="18" rx="4" fill="#D97757" fill-opacity="0.18" stroke="#D97757" stroke-opacity="0.4" stroke-width="0.8"/>
+          <text x="22" y="12.5" class="font-mono" font-size="8" font-weight="700" fill="#E8967D" text-anchor="middle">DESKTOP</text>
+        </g>
+      </g>
+
+      <!-- New Chat Button -->
+      <g transform="translate(14, 52)">
+        <rect width="152" height="30" rx="6" fill="#21201E" stroke="#33312D" stroke-width="0.8"/>
+        <text x="14" y="20" class="font-ui" font-size="11" font-weight="600" fill="#FAF9F5">+ New Session</text>
+        <rect x="118" y="7" width="24" height="16" rx="3" fill="#161514"/>
+        <text x="130" y="18.5" class="font-mono" font-size="8" fill="#7D7971" text-anchor="middle">⌘N</text>
+      </g>
+
+      <!-- Sidebar Divider -->
+      <line x1="14" y1="96" x2="166" y2="96" stroke="#232220" stroke-width="1"/>
 
       <!-- Section: RECENTS -->
-      <text x="16" y="24" class="font-mono" font-size="9.5" font-weight="700" fill="#6A665E" letter-spacing="0.08em">RECENTS</text>
+      <text x="16" y="118" class="font-mono" font-size="9" font-weight="700" fill="#6A665E" letter-spacing="0.08em">RECENTS</text>
 
-      <!-- Recents List -->
-      <g transform="translate(14, 34)">
-        <!-- Active item -->
-        <rect x="0" y="0" width="132" height="26" rx="6" fill="#21201E" stroke="#33322E" stroke-width="0.8"/>
-        <text x="10" y="17" class="font-ui" font-size="11">📁</text>
-        <text x="28" y="17" class="font-mono" font-size="10" font-weight="600" fill="#FAF9F5">src/plugin.ts</text>
+      <g transform="translate(14, 128)">
+        <rect width="152" height="26" rx="5" fill="#D97757" fill-opacity="0.1" stroke="#D97757" stroke-opacity="0.25" stroke-width="0.8"/>
+        <text x="8" y="17" class="font-ui" font-size="10.5">📁</text>
+        <text x="24" y="17" class="font-mono" font-size="9.5" font-weight="600" fill="#FAF9F5">src/plugin.ts</text>
       </g>
 
-      <g transform="translate(14, 64)">
-        <text x="10" y="17" class="font-ui" font-size="11">🎨</text>
-        <text x="28" y="17" class="font-mono" font-size="10" fill="#A39F95">claude-desktop.css</text>
+      <g transform="translate(14, 158)">
+        <text x="8" y="17" class="font-ui" font-size="10.5">🎨</text>
+        <text x="24" y="17" class="font-mono" font-size="9.5" fill="#A39F95">claude-desktop.css</text>
       </g>
-
-      <g transform="translate(14, 92)">
-        <text x="10" y="17" class="font-ui" font-size="11">⚙️</text>
-        <text x="28" y="17" class="font-mono" font-size="10" fill="#A39F95">cordis.yml</text>
-      </g>
-
-      <g transform="translate(14, 120)">
-        <text x="10" y="17" class="font-ui" font-size="11">📄</text>
-        <text x="28" y="17" class="font-mono" font-size="10" fill="#A39F95">README.md</text>
-      </g>
-
-      <!-- Section: SESSIONS -->
-      <text x="16" y="174" class="font-mono" font-size="9.5" font-weight="700" fill="#6A665E" letter-spacing="0.08em">SESSIONS</text>
 
       <g transform="translate(14, 184)">
-        <rect x="0" y="0" width="132" height="26" rx="6" fill="#D97757" fill-opacity="0.12" stroke="#D97757" stroke-opacity="0.3" stroke-width="0.8"/>
-        <circle cx="12" cy="13" r="3" fill="#D97757"/>
-        <text x="24" y="17" class="font-ui" font-size="10.5" font-weight="600" fill="#F4957A">DeepSeek Agent</text>
+        <text x="8" y="17" class="font-ui" font-size="10.5">⚙️</text>
+        <text x="24" y="17" class="font-mono" font-size="9.5" fill="#A39F95">cordis.yml</text>
       </g>
 
-      <g transform="translate(14, 214)">
-        <circle cx="12" cy="13" r="3" fill="#6A665E"/>
-        <text x="24" y="17" class="font-ui" font-size="10.5" fill="#A39F95">Refactor Tool Cards</text>
+      <g transform="translate(14, 210)">
+        <text x="8" y="17" class="font-ui" font-size="10.5">📄</text>
+        <text x="24" y="17" class="font-mono" font-size="9.5" fill="#A39F95">README.md</text>
       </g>
 
-      <g transform="translate(14, 242)">
-        <circle cx="12" cy="13" r="3" fill="#6A665E"/>
-        <text x="24" y="17" class="font-ui" font-size="10.5" fill="#A39F95">Live Preview Drawer</text>
+      <!-- Section: ENGINE SESSIONS -->
+      <text x="16" y="256" class="font-mono" font-size="9" font-weight="700" fill="#6A665E" letter-spacing="0.08em">ENGINE</text>
+
+      <g transform="translate(14, 266)">
+        <rect width="152" height="28" rx="5" fill="#1C1B19" stroke="#2F2E2B" stroke-width="0.8"/>
+        <circle cx="12" cy="14" r="3" fill="#52AD68"/>
+        <text x="22" y="18" class="font-ui" font-size="10" font-weight="600" fill="#FAF9F5">DeepSeek-V3 (dsh)</text>
       </g>
 
-      <!-- Bottom Settings Item -->
-      <line x1="12" y1="440" x2="146" y2="440" stroke="#252422" stroke-width="1"/>
-      <g transform="translate(14, 452)">
-        <text x="8" y="16" class="font-ui" font-size="12">⚙️</text>
-        <text x="28" y="16" class="font-ui" font-size="11" font-weight="500" fill="#FAF9F5">Settings</text>
-        <text x="124" y="16" class="font-mono" font-size="9" fill="#6A665E" text-anchor="end">v0.1.0</text>
+      <!-- Bottom Settings & Status -->
+      <line x1="14" y1="440" x2="166" y2="440" stroke="#232220" stroke-width="1"/>
+      <g transform="translate(16, 456)">
+        <text x="0" y="14" class="font-ui" font-size="12">⚙️</text>
+        <text x="20" y="14" class="font-ui" font-size="11" font-weight="500" fill="#FAF9F5">Settings</text>
+        <text x="148" y="14" class="font-mono" font-size="8.5" fill="#6A665E" text-anchor="end">v0.1.0</text>
       </g>
     </g>
 
 
-    <!-- ==================== CENTER WORKSPACE (CHAT & CODE) ==================== -->
-    <g transform="translate(170, 58)">
-      <rect width="450" height="490" fill="#191918"/>
+    <!-- ========================================================================= -->
+    <!-- CENTER HERO WORKSPACE -->
+    <!-- ========================================================================= -->
+    <g transform="translate(190, 52)">
+      <rect width="450" height="498" fill="#191918"/>
 
-      <!-- User Query Bubble -->
-      <g transform="translate(24, 18)">
-        <text x="32" y="15" class="font-ui" font-size="11.5" font-weight="700" fill="#B4B0A5">User</text>
-        <text x="68" y="15" class="font-mono" font-size="9.5" fill="#65625B">12:42 PM</text>
-        <!-- User avatar mini -->
-        <circle cx="12" cy="12" r="12" fill="#282624" stroke="#3D3B37" stroke-width="1"/>
-        <text x="12" y="16" class="font-ui" font-size="9.5" font-weight="700" fill="#FAF9F5" text-anchor="middle">U</text>
+      <!-- Centered Hero Visual Composition -->
+      <g transform="translate(225, 96)">
         
-        <rect x="0" y="24" width="402" height="34" rx="8" fill="#21201E" stroke="#33312D" stroke-width="1"/>
-        <text x="14" y="45" class="font-ui" font-size="12" fill="#FAF9F5">
-          Run the test suite and verify the Cordis desktop injection hooks.
-        </text>
-      </g>
+        <!-- Large Terracotta Star ✻ -->
+        <g transform="translate(0, 0)">
+          <!-- Star Backing Radial Glow -->
+          <circle cx="0" cy="0" r="48" fill="#D97757" fill-opacity="0.12" filter="url(#star-glow-hero)"/>
+          <circle cx="0" cy="0" r="36" fill="none" stroke="#D97757" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
 
-      <!-- Claude Assistant Editorial Message -->
-      <g transform="translate(24, 90)">
-        <!-- Claude Avatar -->
-        <circle cx="12" cy="12" r="12" fill="#3D2820" stroke="#D97757" stroke-opacity="0.4" stroke-width="1"/>
-        <text x="12" y="16.5" class="font-ui" font-size="12" font-weight="700" fill="#D97757" text-anchor="middle">✻</text>
-        <text x="32" y="15" class="font-ui" font-size="12" font-weight="700" fill="#FAF9F5">Claude</text>
-        <text x="76" y="15" class="font-mono" font-size="9.5" fill="#E8967D">3.7 Sonnet</text>
-        <text x="148" y="15" class="font-mono" font-size="9.5" fill="#65625B">DeepSeek Harness</text>
-
-        <!-- Editorial Typography Text -->
-        <text x="0" y="38" class="font-editorial" font-size="13.5" fill="#D2CEC4" letter-spacing="-0.01em">
-          I've initiated test verification across the Cordis plugin lifecycle.
-        </text>
-        <text x="0" y="55" class="font-editorial" font-size="13.5" fill="#D2CEC4" letter-spacing="-0.01em">
-          Executing test runners for theme injection and keybind dispatchers:
-        </text>
-      </g>
-
-      <!-- Elevated Tool Call Card (.cc-upgraded-tool-card) -->
-      <g transform="translate(24, 172)" filter="url(#card-elevation)">
-        <!-- Card Background with subtle hover terracotta indicator -->
-        <rect width="402" height="154" rx="10" fill="#21201E" stroke="#3D3B37" stroke-width="1"/>
-        <rect x="0" y="0" width="4" height="154" rx="2" fill="#D97757"/>
-
-        <!-- Card Header -->
-        <g transform="translate(16, 12)">
-          <text x="0" y="14" class="font-ui" font-size="11">⚡</text>
-          <text x="18" y="14" class="font-mono" font-size="11" font-weight="600" fill="#FAF9F5">bash: dsh test --coverage</text>
-          
-          <!-- Completed Badge -->
-          <rect x="268" y="0" width="102" height="20" rx="10" fill="#1C2E20" stroke="#3B6C45" stroke-width="0.8"/>
-          <circle cx="278" cy="10" r="3" fill="#52AD68"/>
-          <text x="286" y="13.5" class="font-mono" font-size="9" font-weight="600" fill="#52AD68">PASS 182ms</text>
-        </g>
-
-        <!-- Code Block inside Tool Call -->
-        <rect x="14" y="38" width="374" height="102" rx="6" fill="#141413" stroke="#2B2926" stroke-width="1"/>
-        <g transform="translate(24, 54)">
-          <text x="0" y="0" class="font-mono" font-size="9.5" fill="#52AD68">✔ PASS</text>
-          <text x="46" y="0" class="font-mono" font-size="9.5" fill="#FAF9F5">test/cordis-lifecycle.spec.ts</text>
-          <text x="264" y="0" class="font-mono" font-size="9" fill="#7D7971">(4 tests)</text>
-
-          <text x="0" y="18" class="font-mono" font-size="9.5" fill="#52AD68">✔ PASS</text>
-          <text x="46" y="18" class="font-mono" font-size="9.5" fill="#FAF9F5">test/theme-injection.spec.ts</text>
-          <text x="264" y="18" class="font-mono" font-size="9" fill="#7D7971">(6 tests)</text>
-
-          <line x1="0" y1="30" x2="350" y2="30" stroke="#262522" stroke-width="1"/>
-
-          <text x="0" y="44" class="font-mono" font-size="9" fill="#D97757">Coverage: 98.4% Statements | 100% Functions</text>
-          <text x="0" y="60" class="font-mono" font-size="9" fill="#52AD68">Status: All 10 tests green · UI ready</text>
-        </g>
-      </g>
-
-      <!-- Assistant Follow-up Text -->
-      <g transform="translate(24, 344)">
-        <text class="font-editorial" font-size="13.5" fill="#D2CEC4">
-          All suites passed. The live preview drawer is synced at <tspan fill="#D97757" font-family="'JetBrains Mono', monospace" font-size="11.5">localhost:3000</tspan>.
-        </text>
-      </g>
-
-      <!-- Floating Rounded Composer -->
-      <g transform="translate(24, 420)" filter="url(#terracotta-glow)">
-        <rect width="402" height="48" rx="14" fill="#21201E" stroke="#D97757" stroke-width="1.2"/>
-        
-        <text x="18" y="29" class="font-ui" font-size="12" fill="#7D7971">
-          Ask Claude Code to build, refactor, or test...
-        </text>
-
-        <!-- Attachment icon -->
-        <g transform="translate(326, 16)" opacity="0.6">
-          <circle cx="8" cy="8" r="8" fill="#2C2A27"/>
-          <text x="8" y="12" class="font-ui" font-size="10" text-anchor="middle" fill="#FAF9F5">📎</text>
-        </g>
-
-        <!-- Terracotta Send Button -->
-        <g transform="translate(356, 9)">
-          <circle cx="15" cy="15" r="15" fill="#D97757"/>
-          <!-- Up arrow vector -->
-          <path d="M 15 10 L 10 16 H 13 V 21 H 17 V 16 H 20 Z" fill="#FAF9F5"/>
-        </g>
-      </g>
-
-    </g>
-
-
-    <!-- ==================== RIGHT DRAWER (LIVE APP PREVIEW) ==================== -->
-    <g transform="translate(620, 58)">
-      <!-- Drawer Background -->
-      <rect width="368" height="490" fill="#151413" stroke="#2B2A27" stroke-width="1"/>
-
-      <!-- Drawer Header Bar -->
-      <g transform="translate(16, 12)">
-        <text x="0" y="15" class="font-ui" font-size="12" font-weight="700" fill="#FAF9F5">Live App Preview</text>
-        <rect x="110" y="2" width="46" height="18" rx="4" fill="#D97757" fill-opacity="0.16" stroke="#D97757" stroke-opacity="0.3" stroke-width="0.8"/>
-        <text x="133" y="14" class="font-mono" font-size="8.5" font-weight="700" fill="#E8967D" text-anchor="middle">460px</text>
-
-        <!-- Collapse Icon -->
-        <text x="326" y="15" class="font-ui" font-size="13" fill="#7D7971" text-anchor="end">✕</text>
-      </g>
-
-      <!-- URL Address Bar -->
-      <g transform="translate(16, 38)">
-        <rect width="336" height="28" rx="6" fill="#1C1B19" stroke="#33312D" stroke-width="1"/>
-        <circle cx="14" cy="14" r="3" fill="#52AD68"/>
-        <text x="24" y="18" class="font-mono" font-size="10" fill="#A39F95">http://localhost:3000</text>
-        
-        <!-- Refresh & Popout Buttons -->
-        <text x="296" y="18" class="font-mono" font-size="11" fill="#7D7971">↻</text>
-        <text x="318" y="18" class="font-mono" font-size="11" fill="#7D7971">↗</text>
-      </g>
-
-      <!-- Mini Web App Viewport -->
-      <g transform="translate(16, 76)">
-        <!-- Viewport Canvas Frame -->
-        <rect width="336" height="390" rx="8" fill="#1E1D1B" stroke="#2E2C29" stroke-width="1"/>
-
-        <!-- Mini App Topbar -->
-        <rect width="336" height="32" rx="8" fill="#252421"/>
-        <rect x="0" y="20" width="336" height="12" fill="#252421"/>
-        <line x1="0" y1="32" x2="336" y2="32" stroke="#33312D" stroke-width="1"/>
-        <text x="14" y="20" class="font-ui" font-size="10.5" font-weight="700" fill="#FAF9F5">⚡ Next.js Analytics App</text>
-        <rect x="254" y="7" width="68" height="18" rx="4" fill="#141413"/>
-        <text x="288" y="19" class="font-mono" font-size="8.5" fill="#52AD68" text-anchor="middle">● Live (HMR)</text>
-
-        <!-- Mini KPI Cards -->
-        <g transform="translate(12, 44)">
-          <!-- KPI 1 -->
-          <rect width="148" height="64" rx="6" fill="#2A2825" stroke="#383632" stroke-width="1"/>
-          <text x="12" y="18" class="font-ui" font-size="9" fill="#8C887F">Active Requests</text>
-          <text x="12" y="38" class="font-mono" font-size="16" font-weight="700" fill="#FAF9F5">14,280</text>
-          <text x="12" y="52" class="font-mono" font-size="8.5" fill="#52AD68">▲ +18.4% today</text>
-
-          <!-- KPI 2 -->
-          <g transform="translate(164, 0)">
-            <rect width="148" height="64" rx="6" fill="#2A2825" stroke="#383632" stroke-width="1"/>
-            <text x="12" y="18" class="font-ui" font-size="9" fill="#8C887F">Avg Latency</text>
-            <text x="12" y="38" class="font-mono" font-size="16" font-weight="700" fill="#D97757">24.2ms</text>
-            <text x="12" y="52" class="font-mono" font-size="8.5" fill="#52AD68">▼ -3.1ms optimum</text>
+          <!-- 8-petal vector Claude star -->
+          <g transform="scale(1.05)" fill="#D97757">
+            <rect x="-3" y="-28" width="6" height="56" rx="3"/>
+            <rect x="-28" y="-3" width="56" height="6" rx="3"/>
+            <rect x="-3" y="-28" width="6" height="56" rx="3" transform="rotate(45)"/>
+            <rect x="-3" y="-28" width="6" height="56" rx="3" transform="rotate(-45)"/>
+            <circle cx="0" cy="0" r="5" fill="#FAF9F5"/>
           </g>
         </g>
 
-        <!-- Mini Chart Graphic -->
-        <g transform="translate(12, 120)">
-          <rect width="312" height="110" rx="6" fill="#252421" stroke="#35332E" stroke-width="1"/>
-          <text x="12" y="18" class="font-ui" font-size="9.5" font-weight="600" fill="#FAF9F5">Traffic Throughput (req/s)</text>
+        <!-- Title: 'Claude Code' in Newsreader serif -->
+        <text x="0" y="68" class="font-editorial" font-size="34" font-weight="600" fill="#FAF9F5" text-anchor="middle" letter-spacing="-0.02em">
+          Claude Code
+        </text>
 
-          <!-- Mini bars -->
-          <rect x="16" y="60" width="16" height="38" rx="2" fill="#D97757" opacity="0.6"/>
-          <rect x="40" y="44" width="16" height="54" rx="2" fill="#D97757" opacity="0.8"/>
-          <rect x="64" y="35" width="16" height="63" rx="2" fill="#D97757"/>
-          <rect x="88" y="50" width="16" height="48" rx="2" fill="#D97757" opacity="0.7"/>
-          <rect x="112" y="28" width="16" height="70" rx="2" fill="#D97757"/>
-          <rect x="136" y="38" width="16" height="60" rx="2" fill="#D97757" opacity="0.85"/>
-          <rect x="160" y="22" width="16" height="76" rx="2" fill="#E8967D"/>
-          <rect x="184" y="30" width="16" height="68" rx="2" fill="#D97757"/>
-          <rect x="208" y="45" width="16" height="53" rx="2" fill="#D97757" opacity="0.75"/>
-          <rect x="232" y="20" width="16" height="78" rx="2" fill="#E8967D"/>
-          <rect x="256" y="32" width="16" height="66" rx="2" fill="#D97757"/>
-          <rect x="280" y="25" width="16" height="73" rx="2" fill="#D97757"/>
+        <!-- Subtitle: 'What can I help you build today?' -->
+        <text x="0" y="96" class="font-editorial" font-size="16.5" font-style="italic" fill="#C4C0B5" text-anchor="middle">
+          What can I help you build today?
+        </text>
 
-          <!-- baseline -->
-          <line x1="12" y1="98" x2="300" y2="98" stroke="#423F3A" stroke-width="1"/>
+        <!-- Suggestion Chips Grid (2 Cards) -->
+        <g transform="translate(-195, 126)">
+          <!-- Suggestion 1 -->
+          <rect width="190" height="50" rx="8" fill="#21201E" stroke="#33312D" stroke-width="0.8"/>
+          <text x="12" y="22" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5">⚡ Inspect Cordis plugin</text>
+          <text x="12" y="38" class="font-mono" font-size="8.5" fill="#8C887F">apply(ctx) lifecycle hooks</text>
+
+          <!-- Suggestion 2 -->
+          <g transform="translate(200, 0)">
+            <rect width="190" height="50" rx="8" fill="#21201E" stroke="#33312D" stroke-width="0.8"/>
+            <text x="12" y="22" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5">🛡️ Toggle Plan Mode</text>
+            <text x="12" y="38" class="font-mono" font-size="8.5" fill="#8C887F">Press Shift + Tab</text>
+          </g>
+        </g>
+      </g>
+
+      <!-- FLOATING CAPSULE COMPOSER (Warm Dark #21201E, Rounded 20px, Terracotta Send Button) -->
+      <g transform="translate(20, 400)" filter="url(#composer-shadow)">
+        <!-- Capsule Body -->
+        <rect width="410" height="54" rx="20" fill="#21201E" stroke="#3D3B36" stroke-width="1.2"/>
+        
+        <!-- Inner Attachment Icon -->
+        <g transform="translate(18, 17)">
+          <circle cx="10" cy="10" r="10" fill="#2A2825"/>
+          <text x="10" y="14" class="font-ui" font-size="11" text-anchor="middle" fill="#A39F95">+</text>
         </g>
 
-        <!-- Mini List / Table -->
-        <g transform="translate(12, 242)">
-          <rect width="312" height="136" rx="6" fill="#252421" stroke="#35332E" stroke-width="1"/>
+        <!-- Placeholder Input Text -->
+        <text x="48" y="33" class="font-ui" font-size="12.5" fill="#7D7971">
+          Ask Claude Code to build, refactor, or test...
+        </text>
+
+        <!-- Model indicator mini pill -->
+        <rect x="306" y="16" width="50" height="22" rx="4" fill="#181716" stroke="#2B2926" stroke-width="0.8"/>
+        <text x="331" y="30.5" class="font-mono" font-size="8.5" fill="#E8967D" text-anchor="middle">3.7 Son</text>
+
+        <!-- Terracotta Send Button (Circle with White Arrow Up) -->
+        <g transform="translate(362, 10)">
+          <circle cx="17" cy="17" r="17" fill="#D97757"/>
+          <!-- White Arrow Up Vector -->
+          <path d="M 17 10 L 11 17 H 15 V 23 H 19 V 17 H 23 Z" fill="#FAF9F5"/>
+        </g>
+      </g>
+    </g>
+
+
+    <!-- ========================================================================= -->
+    <!-- RIGHT DRAWER: SLIDE-OUT LIVE PREVIEW PANEL (460px) -->
+    <!-- ========================================================================= -->
+    <g transform="translate(640, 52)">
+      <!-- Drawer Background -->
+      <rect width="350" height="498" fill="#151413" stroke="#2B2A27" stroke-width="1"/>
+
+      <!-- Drawer Header Bar -->
+      <g transform="translate(16, 14)">
+        <text x="0" y="14" class="font-ui" font-size="12" font-weight="700" fill="#FAF9F5">Live App Preview</text>
+        <rect x="114" y="1" width="50" height="18" rx="4" fill="#D97757" fill-opacity="0.16" stroke="#D97757" stroke-opacity="0.3" stroke-width="0.8"/>
+        <text x="139" y="13" class="font-mono" font-size="8.5" font-weight="700" fill="#E8967D" text-anchor="middle">460px</text>
+
+        <!-- Close / collapse icon -->
+        <text x="312" y="14" class="font-ui" font-size="12" fill="#7D7971" text-anchor="end">✕</text>
+      </g>
+
+      <!-- URL Address Bar -->
+      <g transform="translate(16, 40)">
+        <rect width="318" height="28" rx="6" fill="#1C1B19" stroke="#33312D" stroke-width="1"/>
+        <circle cx="14" cy="14" r="3" fill="#52AD68"/>
+        <text x="24" y="18" class="font-mono" font-size="10" fill="#FAF9F5">http://localhost:3000</text>
+        <text x="278" y="18" class="font-mono" font-size="11" fill="#7D7971">↻  ↗</text>
+      </g>
+
+      <!-- Viewport Canvas Frame -->
+      <g transform="translate(16, 78)">
+        <rect width="318" height="394" rx="8" fill="#1E1D1B" stroke="#2E2C29" stroke-width="1"/>
+
+        <!-- Mini App Topbar -->
+        <rect width="318" height="32" rx="8" fill="#252421"/>
+        <rect x="0" y="20" width="318" height="12" fill="#252421"/>
+        <line x1="0" y1="32" x2="318" y2="32" stroke="#33312D" stroke-width="1"/>
+        <text x="12" y="20" class="font-ui" font-size="10" font-weight="700" fill="#FAF9F5">⚡ Next.js Analytics App</text>
+        <rect x="238" y="7" width="68" height="18" rx="4" fill="#141413"/>
+        <text x="272" y="19" class="font-mono" font-size="8" fill="#52AD68" text-anchor="middle">● Live (HMR)</text>
+
+        <!-- KPI Metric Cards -->
+        <g transform="translate(10, 44)">
+          <rect width="144" height="60" rx="6" fill="#2A2825" stroke="#383632" stroke-width="1"/>
+          <text x="10" y="16" class="font-ui" font-size="8.5" fill="#8C887F">Active Requests</text>
+          <text x="10" y="36" class="font-mono" font-size="15" font-weight="700" fill="#FAF9F5">14,280</text>
+          <text x="10" y="50" class="font-mono" font-size="8" fill="#52AD68">▲ +18.4% today</text>
+
+          <g transform="translate(154, 0)">
+            <rect width="144" height="60" rx="6" fill="#2A2825" stroke="#383632" stroke-width="1"/>
+            <text x="10" y="16" class="font-ui" font-size="8.5" fill="#8C887F">Avg Latency</text>
+            <text x="10" y="36" class="font-mono" font-size="15" font-weight="700" fill="#D97757">24.2ms</text>
+            <text x="10" y="50" class="font-mono" font-size="8" fill="#52AD68">▼ -3.1ms</text>
+          </g>
+        </g>
+
+        <!-- Live Waveform Chart -->
+        <g transform="translate(10, 116)">
+          <rect width="298" height="110" rx="6" fill="#252421" stroke="#35332E" stroke-width="1"/>
+          <text x="12" y="18" class="font-ui" font-size="9" font-weight="600" fill="#FAF9F5">Traffic Throughput (req/s)</text>
+
+          <!-- Bars -->
+          <rect x="14" y="60" width="14" height="38" rx="2" fill="#D97757" opacity="0.6"/>
+          <rect x="36" y="44" width="14" height="54" rx="2" fill="#D97757" opacity="0.8"/>
+          <rect x="58" y="35" width="14" height="63" rx="2" fill="#D97757"/>
+          <rect x="80" y="50" width="14" height="48" rx="2" fill="#D97757" opacity="0.7"/>
+          <rect x="102" y="28" width="14" height="70" rx="2" fill="#D97757"/>
+          <rect x="124" y="38" width="14" height="60" rx="2" fill="#D97757" opacity="0.85"/>
+          <rect x="146" y="22" width="14" height="76" rx="2" fill="#E8967D"/>
+          <rect x="168" y="30" width="14" height="68" rx="2" fill="#D97757"/>
+          <rect x="190" y="45" width="14" height="53" rx="2" fill="#D97757" opacity="0.75"/>
+          <rect x="212" y="20" width="14" height="78" rx="2" fill="#E8967D"/>
+          <rect x="234" y="32" width="14" height="66" rx="2" fill="#D97757"/>
+          <rect x="256" y="25" width="14" height="73" rx="2" fill="#D97757"/>
+
+          <line x1="10" y1="98" x2="288" y2="98" stroke="#423F3A" stroke-width="1"/>
+        </g>
+
+        <!-- Live Telemetry List -->
+        <g transform="translate(10, 238)">
+          <rect width="298" height="136" rx="6" fill="#252421" stroke="#35332E" stroke-width="1"/>
+          <text x="12" y="20" class="font-ui" font-size="9" font-weight="600" fill="#FAF9F5">Recent Telemetry</text>
           
-          <text x="14" y="20" class="font-ui" font-size="9.5" font-weight="600" fill="#FAF9F5">Recent Endpoint Telemetry</text>
-          
-          <line x1="12" y1="30" x2="300" y2="30" stroke="#33312D" stroke-width="1"/>
+          <text x="12" y="46" class="font-mono" font-size="8.5" fill="#52AD68">GET /api/v1/sessions [200 OK]</text>
+          <text x="286" y="46" class="font-mono" font-size="8" fill="#7D7971" text-anchor="end">12ms</text>
 
-          <!-- Row 1 -->
-          <text x="14" y="48" class="font-mono" font-size="9" fill="#52AD68">GET /api/v1/sessions</text>
-          <text x="210" y="48" class="font-mono" font-size="8.5" fill="#FAF9F5">200 OK</text>
-          <text x="296" y="48" class="font-mono" font-size="8.5" fill="#7D7971" text-anchor="end">12ms</text>
+          <text x="12" y="68" class="font-mono" font-size="8.5" fill="#52AD68">POST /api/cordis/apply [201 OK]</text>
+          <text x="286" y="68" class="font-mono" font-size="8" fill="#7D7971" text-anchor="end">48ms</text>
 
-          <!-- Row 2 -->
-          <text x="14" y="70" class="font-mono" font-size="9" fill="#52AD68">POST /api/v1/cordis/apply</text>
-          <text x="210" y="70" class="font-mono" font-size="8.5" fill="#FAF9F5">201 OK</text>
-          <text x="296" y="70" class="font-mono" font-size="8.5" fill="#7D7971" text-anchor="end">48ms</text>
+          <text x="12" y="90" class="font-mono" font-size="8.5" fill="#D97757">PATCH /theme/toggle [200 OK]</text>
+          <text x="286" y="90" class="font-mono" font-size="8" fill="#7D7971" text-anchor="end">8ms</text>
 
-          <!-- Row 3 -->
-          <text x="14" y="92" class="font-mono" font-size="9" fill="#D97757">PATCH /api/theme/toggle</text>
-          <text x="210" y="92" class="font-mono" font-size="8.5" fill="#FAF9F5">200 OK</text>
-          <text x="296" y="92" class="font-mono" font-size="8.5" fill="#7D7971" text-anchor="end">8ms</text>
-
-          <!-- Row 4 -->
-          <text x="14" y="114" class="font-mono" font-size="9" fill="#52AD68">GET /live-reload/socket</text>
-          <text x="210" y="114" class="font-mono" font-size="8.5" fill="#FAF9F5">101 UP</text>
-          <text x="296" y="114" class="font-mono" font-size="8.5" fill="#7D7971" text-anchor="end">1ms</text>
+          <text x="12" y="112" class="font-mono" font-size="8.5" fill="#52AD68">GET /live-reload/hmr [101 UP]</text>
+          <text x="286" y="112" class="font-mono" font-size="8" fill="#7D7971" text-anchor="end">1ms</text>
         </g>
       </g>
     </g>

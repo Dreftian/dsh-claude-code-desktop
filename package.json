@@ -44,7 +44,7 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "tsc"
+    "build": "tsc && node -e \"require('fs').copyFileSync('client.js', 'dist/client/index.js')\""
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": ">=4.0.0"

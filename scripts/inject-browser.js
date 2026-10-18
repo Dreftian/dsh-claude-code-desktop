@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         dsh-claude-code-desktop Hot Injector
 // @namespace    https://github.com/deepseek-ai/dsh
-// @version      1.0.0
+// @version      2.0.0
 // @description  Hot-inject Claude Code Desktop GUI theme and controls into DeepSeek Harness web UI
 // @author       dsh-claude-code-desktop
 // @match        http://localhost:3080/*
@@ -21,8 +21,49 @@
     return;
   }
 
-  const CLAUDE_DESKTOP_CSS = `
-  :root, [data-claude-theme="dark"] {
+  var CLAUDE_DESKTOP_CSS = `
+  /* ==========================================================================
+     Anthropic Claude Code Desktop - System-Level Theme Tokens for DeepSeek Harness
+     ========================================================================== */
+
+  :root,
+  [data-ds-dark-theme="true"],
+  [data-claude-theme="dark"] {
+    --dsw-alias-bg-base: #191918 !important;
+    --dsw-specific-sidebar-fill: #141413 !important;
+    --dsw-alias-bg-layer-1: #21201E !important;
+    --dsw-alias-bg-layer-2: #292825 !important;
+    --dsw-alias-bg-layer-3: #2C2B28 !important;
+    --dsw-alias-bg-module-platform: #191918 !important;
+
+    --dsw-specific-input-major: #23221F !important;
+    --dsw-specific-selector: #292825 !important;
+    --dsw-specific-bubble: #21201E !important;
+    --dsw-specific-sidebar-nav-item-active: #292825 !important;
+    --dsw-specific-sidebar-nav-item-hover: #21201E !important;
+
+    --dsw-alias-brand-primary: #D97757 !important;
+    --dsw-alias-brand-primary-new-colorprimary-new-color: #D97757 !important;
+    --dsw-alias-button-info-fill: #D97757 !important;
+    --dsw-alias-button-info-hover: #C66143 !important;
+    --dsw-alias-button-primary-fill: #D97757 !important;
+    --dsw-alias-button-elevated-fill: #2C2B28 !important;
+    --dsw-alias-button-floating-fill: #23221F !important;
+    --dsw-alias-state-business-primary: #D97757 !important;
+
+    --dsw-alias-border-l1: #353430 !important;
+    --dsw-alias-border-l2: #2D2C28 !important;
+    --dsw-alias-border-l3: #282724 !important;
+    --dsw-alias-border-l4: #201F1D !important;
+
+    --dsw-alias-label-primary: #F4F3EE !important;
+    --dsw-alias-label-secondary: #A8A6A0 !important;
+    --dsw-alias-label-tertiary: #787670 !important;
+    --dsw-alias-label-caption: #605E59 !important;
+
+    --dsw-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    --ds-font-family-code: 'JetBrains Mono', 'Fira Code', monospace !important;
+
     --cc-bg-app: #191918;
     --cc-bg-sidebar: #141413;
     --cc-bg-surface: #21201E;
@@ -46,7 +87,40 @@
     --cc-shadow-card: 0 4px 14px rgba(0, 0, 0, 0.22);
   }
 
-  [data-claude-theme="light"] {
+  [data-claude-theme="light"],
+  [data-ds-dark-theme="false"] {
+    --dsw-alias-bg-base: #FAF9F5 !important;
+    --dsw-specific-sidebar-fill: #F0EEE6 !important;
+    --dsw-alias-bg-layer-1: #F3F1E9 !important;
+    --dsw-alias-bg-layer-2: #EAE7DD !important;
+    --dsw-alias-bg-layer-3: #FFFFFF !important;
+    --dsw-alias-bg-module-platform: #FAF9F5 !important;
+
+    --dsw-specific-input-major: #FFFFFF !important;
+    --dsw-specific-selector: #EAE7DD !important;
+    --dsw-specific-bubble: #F3F1E9 !important;
+    --dsw-specific-sidebar-nav-item-active: #EAE7DD !important;
+    --dsw-specific-sidebar-nav-item-hover: #F3F1E9 !important;
+
+    --dsw-alias-brand-primary: #D97757 !important;
+    --dsw-alias-brand-primary-new-colorprimary-new-color: #D97757 !important;
+    --dsw-alias-button-info-fill: #D97757 !important;
+    --dsw-alias-button-info-hover: #C25E40 !important;
+    --dsw-alias-button-primary-fill: #D97757 !important;
+    --dsw-alias-button-elevated-fill: #FFFFFF !important;
+    --dsw-alias-button-floating-fill: #FFFFFF !important;
+    --dsw-alias-state-business-primary: #D97757 !important;
+
+    --dsw-alias-border-l1: #E2DFD6 !important;
+    --dsw-alias-border-l2: #EAE7DF !important;
+    --dsw-alias-border-l3: #EFECE5 !important;
+    --dsw-alias-border-l4: #F5F3EC !important;
+
+    --dsw-alias-label-primary: #141413 !important;
+    --dsw-alias-label-secondary: #5C5B57 !important;
+    --dsw-alias-label-tertiary: #8C8A84 !important;
+    --dsw-alias-label-caption: #A3A19B !important;
+
     --cc-bg-app: #FAF9F5;
     --cc-bg-sidebar: #F0EEE6;
     --cc-bg-surface: #F3F1E9;
@@ -70,7 +144,6 @@
     --cc-shadow-card: 0 2px 10px rgba(20, 20, 19, 0.05);
   }
 
-  /* Base Desktop Application Reset */
   html, body, #root, #app, main {
     background-color: var(--cc-bg-app) !important;
     color: var(--cc-text-primary) !important;
@@ -79,30 +152,27 @@
   }
 
   body {
-    padding-top: 48px !important;
-    transition: background-color 0.2s ease, color 0.2s ease, margin-right 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    padding-top: 0 !important;
+    transition: margin-right 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
-  /* Sidebar estilo Claude Desktop */
   aside, nav, [class*="sidebar"], [class*="Sidebar"] {
     background-color: var(--cc-bg-sidebar) !important;
     border-right: 1px solid var(--cc-border-subtle) !important;
-    color: var(--cc-text-secondary) !important;
   }
 
-  /* Tipografía Editorial de Claude para mensajes del asistente */
   [class*="markdown"] p,
-  [class*="message"] p,
+  [class*="message"] [class*="markdown"] p,
   [class*="assistant"] p,
-  article p {
+  article p,
+  .cc-editorial-text {
     font-family: 'Newsreader', Georgia, 'Times New Roman', serif !important;
-    font-size: 1.065rem !important;
-    line-height: 1.68 !important;
-    letter-spacing: -0.004em !important;
+    font-size: 1.075rem !important;
+    line-height: 1.72 !important;
+    letter-spacing: -0.005em !important;
     color: var(--cc-text-primary) !important;
   }
 
-  /* Tarjetas gráficas para llamadas a herramientas y bloques de código (NO aspecto CLI) */
   pre, code, [class*="code"], [class*="tool"], [class*="Tool"] {
     font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
   }
@@ -110,7 +180,7 @@
   pre, [class*="tool-call"], [class*="ToolCall"], .cc-upgraded-tool-card {
     background-color: var(--cc-bg-surface) !important;
     border: 1px solid var(--cc-border) !important;
-    border-radius: 14px !important;
+    border-radius: 12px !important;
     box-shadow: var(--cc-shadow-card) !important;
     padding: 12px 16px !important;
     margin: 10px 0 !important;
@@ -121,24 +191,25 @@
     border-color: var(--cc-accent) !important;
   }
 
-  /* Cajón de Prompt Flotante de Claude Code Desktop */
-  textarea, [class*="composer"], [class*="input-container"], form {
+  [class*="RlGAzG_card"],
+  [class*="composer"],
+  div[class*="card"]:has(textarea) {
     background-color: var(--cc-bg-composer) !important;
     border: 1px solid var(--cc-border) !important;
-    color: var(--cc-text-primary) !important;
-    border-radius: 18px !important;
+    border-radius: 20px !important;
     box-shadow: var(--cc-shadow-composer) !important;
     transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
   }
 
-  textarea:focus, [class*="composer"]:focus-within, form:focus-within {
+  [class*="RlGAzG_card"]:focus-within,
+  [class*="composer"]:focus-within,
+  div[class*="card"]:has(textarea:focus) {
     border-color: var(--cc-accent) !important;
     box-shadow: 0 0 0 2px var(--cc-accent-soft), var(--cc-shadow-composer) !important;
-    outline: none !important;
   }
 
-  /* Botón de envío Terracota */
-  button[type="submit"], [class*="send-btn"], [class*="submit"] {
+  [class*="RlGAzG_primary"],
+  button[type="submit"]:not(#cc-preview-refresh) {
     background-color: var(--cc-accent) !important;
     color: #FFFFFF !important;
     border-radius: 10px !important;
@@ -148,75 +219,77 @@
     transition: background-color 0.15s ease, transform 0.1s ease !important;
   }
 
-  button[type="submit"]:hover, [class*="send-btn"]:hover {
+  [class*="RlGAzG_primary"]:hover,
+  button[type="submit"]:hover {
     background-color: var(--cc-accent-hover) !important;
     transform: translateY(-1px) !important;
   }
 
-  /* Barra Superior Nativa de Claude Code Desktop */
-  #cc-desktop-titlebar {
+  #cc-system-header {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 48px;
-    background-color: var(--cc-bg-sidebar);
-    border-bottom: 1px solid var(--cc-border);
+    left: 230px;
+    right: 140px;
+    height: 38px;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 18px;
-    z-index: 99999;
+    padding: 0 12px;
+    pointer-events: none;
+    -webkit-app-region: drag;
     user-select: none;
     font-family: 'Inter', sans-serif;
   }
 
-  .cc-nav-group {
+  .cc-header-inner {
     display: flex;
     align-items: center;
     gap: 12px;
+    pointer-events: auto;
+    -webkit-app-region: no-drag;
   }
 
   .cc-brand-badge {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-weight: 600;
-    font-size: 13.5px;
+    font-size: 13px;
     color: var(--cc-text-primary);
   }
 
   .cc-brand-icon {
     color: var(--cc-accent);
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1;
+    font-weight: 700;
   }
 
   .cc-workspace-chip {
-    font-size: 11.5px;
+    font-size: 11px;
     color: var(--cc-text-secondary);
     background-color: var(--cc-bg-surface);
     border: 1px solid var(--cc-border);
-    padding: 3px 9px;
+    padding: 2px 8px;
     border-radius: 6px;
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Selector Segmentado Chat | Code */
   .cc-segmented-control {
     display: flex;
     background-color: var(--cc-bg-surface);
     border: 1px solid var(--cc-border);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 2px;
     gap: 2px;
   }
 
   .cc-seg-item {
-    padding: 4px 16px;
-    font-size: 12px;
+    padding: 2px 12px;
+    font-size: 11.5px;
     font-weight: 500;
-    border-radius: 7px;
+    border-radius: 6px;
     border: none;
     background: transparent;
     color: var(--cc-text-secondary);
@@ -230,14 +303,13 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 
-  /* Píldoras Interactivas de Estado y Permisos */
   .cc-action-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 5px 12px;
+    gap: 5px;
+    padding: 3px 10px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 500;
     cursor: pointer;
     border: 1px solid var(--cc-border);
@@ -262,16 +334,55 @@
     color: var(--cc-auto-text);
   }
 
-  /* Panel Derecho Deslizable de Live App Preview & Diff Inspector */
+  .cc-sidebar-claude-mark {
+    color: var(--cc-accent) !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    display: inline-block !important;
+    font-weight: 700 !important;
+  }
+
+  .cc-sidebar-claude-text {
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: var(--cc-text-primary) !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .cc-hero-claude-star {
+    font-size: 52px !important;
+    color: var(--cc-accent) !important;
+    display: block !important;
+    margin: 0 auto 12px auto !important;
+    line-height: 1 !important;
+  }
+
+  .cc-hero-title {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 26px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--cc-text-primary) !important;
+    margin-bottom: 6px !important;
+  }
+
+  .cc-hero-subtitle {
+    font-family: 'Newsreader', Georgia, serif !important;
+    font-size: 16px !important;
+    font-style: italic !important;
+    color: var(--cc-text-secondary) !important;
+    margin-bottom: 24px !important;
+  }
+
   #cc-desktop-drawer {
     position: fixed;
-    top: 48px;
+    top: 38px;
     right: 0;
     bottom: 0;
     width: 460px;
     background-color: var(--cc-bg-sidebar);
     border-left: 1px solid var(--cc-border);
-    z-index: 99998;
+    z-index: 9998;
     display: none;
     flex-direction: column;
     box-shadow: var(--cc-shadow-composer);
@@ -282,7 +393,7 @@
   }
 
   .cc-drawer-toolbar {
-    padding: 10px 14px;
+    padding: 8px 12px;
     border-bottom: 1px solid var(--cc-border);
     display: flex;
     align-items: center;
@@ -295,9 +406,9 @@
     background-color: var(--cc-bg-composer);
     border: 1px solid var(--cc-border);
     color: var(--cc-text-primary);
-    border-radius: 8px;
-    padding: 5px 10px;
-    font-size: 12px;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 11.5px;
     font-family: 'JetBrains Mono', monospace;
   }
 
@@ -308,10 +419,9 @@
     background-color: #FFFFFF;
   }
 
-  /* Scrollbars sutiles estilo macOS / Claude Desktop */
   ::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
@@ -322,44 +432,63 @@
   }
   `;
 
-  let domObserver = null;
-  let keydownHandler = null;
+  var domObserver = null;
+  var keydownHandler = null;
+
+  function getStoredTheme() {
+    try {
+      return localStorage.getItem('cc-desktop-theme') || 'dark';
+    } catch (e) {
+      return 'dark';
+    }
+  }
+
+  function setStoredTheme(theme) {
+    try {
+      localStorage.setItem('cc-desktop-theme', theme);
+    } catch (e) {}
+  }
 
   function unmountClaudeDesktopUI() {
     if (domObserver) {
-      domObserver.disconnect();
+      try {
+        domObserver.disconnect();
+      } catch (e) {}
       domObserver = null;
     }
     if (keydownHandler) {
       window.removeEventListener('keydown', keydownHandler);
       keydownHandler = null;
     }
-    const styles = document.getElementById('cc-desktop-styles');
-    if (styles) styles.remove();
-
-    const fonts = document.getElementById('cc-desktop-fonts');
-    if (fonts) fonts.remove();
-
-    const titlebar = document.getElementById('cc-desktop-titlebar');
-    if (titlebar) titlebar.remove();
-
-    const drawer = document.getElementById('cc-desktop-drawer');
-    if (drawer) drawer.remove();
-
-    document.body.style.marginRight = '0px';
-    document.body.style.paddingTop = '0px';
+    var s = document.getElementById('cc-desktop-styles'); if (s) s.remove();
+    var f = document.getElementById('cc-desktop-fonts'); if (f) f.remove();
+    var h = document.getElementById('cc-system-header'); if (h) h.remove();
+    var d = document.getElementById('cc-desktop-drawer'); if (d) d.remove();
+    if (document.body) {
+      document.body.style.marginRight = '0px';
+    }
     console.log('[Claude Code Desktop GUI] Desmontado exitosamente.');
   }
 
   function mountClaudeDesktopUI() {
+    if (typeof document === 'undefined') return;
+
+    if (!document.body) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', mountClaudeDesktopUI);
+      } else {
+        setTimeout(mountClaudeDesktopUI, 40);
+      }
+      return;
+    }
+
     if (document.getElementById('cc-desktop-styles')) {
       console.warn('[Claude Code Desktop GUI] Ya se encuentra inyectado.');
       return;
     }
 
-    // 1. Fuentes (Newsreader + Inter + JetBrains Mono)
-    if (!document.getElementById('cc-desktop-fonts')) {
-      const fontLink = document.createElement('link');
+    if (!document.getElementById('cc-desktop-fonts') && document.head) {
+      var fontLink = document.createElement('link');
       fontLink.id = 'cc-desktop-fonts';
       fontLink.rel = 'stylesheet';
       fontLink.href =
@@ -367,28 +496,31 @@
       document.head.appendChild(fontLink);
     }
 
-    // 2. Inyección de CSS
-    const styleTag = document.createElement('style');
+    var styleTag = document.createElement('style');
     styleTag.id = 'cc-desktop-styles';
     styleTag.textContent = CLAUDE_DESKTOP_CSS;
-    document.head.appendChild(styleTag);
+    if (document.head) {
+      document.head.appendChild(styleTag);
+    }
 
-    const savedTheme = localStorage.getItem('cc-desktop-theme') || 'dark';
-    document.documentElement.setAttribute('data-claude-theme', savedTheme);
+    var savedTheme = getStoredTheme();
+    if (document.documentElement) {
+      document.documentElement.setAttribute('data-claude-theme', savedTheme);
+      document.documentElement.setAttribute('data-ds-dark-theme', savedTheme === 'dark' ? 'true' : 'false');
+    }
 
-    // 3. Barra Superior
-    const titlebar = document.createElement('header');
-    titlebar.id = 'cc-desktop-titlebar';
-    titlebar.innerHTML = `
-      <div class="cc-nav-group">
+    var header = document.createElement('header');
+    header.id = 'cc-system-header';
+    header.innerHTML = `
+      <div class="cc-header-inner">
         <div class="cc-brand-badge">
           <span class="cc-brand-icon">✻</span>
           <span>Claude Code</span>
         </div>
-        <span class="cc-workspace-chip" title="Workspace activo en DeepSeek Harness">dsh · workspace</span>
+        <span class="cc-workspace-chip" title="DeepSeek Harness Workspace">dsh · workspace</span>
       </div>
 
-      <div class="cc-nav-group">
+      <div class="cc-header-inner">
         <div class="cc-segmented-control" role="tablist">
           <button class="cc-seg-item" id="cc-mode-chat" type="button">Chat</button>
           <button class="cc-seg-item active" id="cc-mode-code" type="button">Code</button>
@@ -398,23 +530,22 @@
         </button>
       </div>
 
-      <div class="cc-nav-group">
+      <div class="cc-header-inner">
         <button class="cc-action-pill" id="cc-drawer-toggle" type="button">
           <span>⚡ App Preview</span>
         </button>
-        <button class="cc-action-pill" id="cc-theme-switch" type="button" title="Alternar entre Anthropic Dark y Paper Light">
+        <button class="cc-action-pill" id="cc-theme-switch" type="button" title="Alternar entre Anthropic Warm Dark y Warm Paper">
           <span>◐ Tema</span>
         </button>
       </div>
     `;
-    document.body.appendChild(titlebar);
+    document.body.appendChild(header);
 
-    // 4. Panel Derecho de Live Preview
-    const drawer = document.createElement('aside');
+    var drawer = document.createElement('aside');
     drawer.id = 'cc-desktop-drawer';
     drawer.innerHTML = `
       <div class="cc-drawer-toolbar">
-        <span style="font-size:12px; font-weight:600; color:var(--cc-text-secondary);">Live Preview</span>
+        <span style="font-size:11.5px; font-weight:600; color:var(--cc-text-secondary);">Live Preview</span>
         <input class="cc-url-bar" id="cc-preview-url" type="text" value="http://localhost:3000" />
         <button class="cc-action-pill" id="cc-preview-refresh" type="button">↻</button>
       </div>
@@ -422,11 +553,10 @@
     `;
     document.body.appendChild(drawer);
 
-    // 5. Interactividad
-    const permissionPill = document.getElementById('cc-permission-pill');
-    const togglePermissionMode = () => {
+    var permissionPill = document.getElementById('cc-permission-pill');
+    var togglePermissionMode = function () {
       if (!permissionPill) return;
-      const current = permissionPill.getAttribute('data-mode');
+      var current = permissionPill.getAttribute('data-mode');
       if (current === 'plan') {
         permissionPill.setAttribute('data-mode', 'auto');
         permissionPill.innerHTML = '<span>⚡ Auto-Accept Edits</span>';
@@ -440,94 +570,137 @@
       permissionPill.addEventListener('click', togglePermissionMode);
     }
 
-    keydownHandler = (ev) => {
-      if (ev.shiftKey && ev.key === 'Tab') {
+    keydownHandler = function (ev) {
+      if (ev && ev.shiftKey && ev.key === 'Tab') {
         ev.preventDefault();
         togglePermissionMode();
       }
     };
     window.addEventListener('keydown', keydownHandler);
 
-    const btnChat = document.getElementById('cc-mode-chat');
-    const btnCode = document.getElementById('cc-mode-code');
+    var btnChat = document.getElementById('cc-mode-chat');
+    var btnCode = document.getElementById('cc-mode-code');
     if (btnChat && btnCode) {
-      btnChat.addEventListener('click', () => {
+      btnChat.addEventListener('click', function () {
         btnChat.classList.add('active');
         btnCode.classList.remove('active');
       });
-      btnCode.addEventListener('click', () => {
+      btnCode.addEventListener('click', function () {
         btnCode.classList.add('active');
         btnChat.classList.remove('active');
       });
     }
 
-    const themeSwitch = document.getElementById('cc-theme-switch');
+    var themeSwitch = document.getElementById('cc-theme-switch');
     if (themeSwitch) {
-      themeSwitch.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-claude-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-claude-theme', next);
-        localStorage.setItem('cc-desktop-theme', next);
+      themeSwitch.addEventListener('click', function () {
+        var current = document.documentElement ? document.documentElement.getAttribute('data-claude-theme') : 'dark';
+        var next = current === 'dark' ? 'light' : 'dark';
+        if (document.documentElement) {
+          document.documentElement.setAttribute('data-claude-theme', next);
+          document.documentElement.setAttribute('data-ds-dark-theme', next === 'dark' ? 'true' : 'false');
+        }
+        setStoredTheme(next);
       });
     }
 
-    const drawerToggle = document.getElementById('cc-drawer-toggle');
-    const urlInput = document.getElementById('cc-preview-url');
-    const iframe = document.getElementById('cc-preview-iframe');
-    const refreshBtn = document.getElementById('cc-preview-refresh');
+    var drawerToggle = document.getElementById('cc-drawer-toggle');
+    var urlInput = document.getElementById('cc-preview-url');
+    var iframe = document.getElementById('cc-preview-iframe');
+    var refreshBtn = document.getElementById('cc-preview-refresh');
 
-    if (drawerToggle && drawer && iframe && urlInput) {
-      drawerToggle.addEventListener('click', () => {
-        const isOpen = drawer.classList.toggle('open');
-        document.body.style.marginRight = isOpen ? '460px' : '0px';
-        if (isOpen && iframe.src === 'about:blank') {
+    if (drawerToggle && drawer) {
+      drawerToggle.addEventListener('click', function () {
+        var isOpen = drawer.classList.toggle('open');
+        if (document.body) {
+          document.body.style.marginRight = isOpen ? '460px' : '0px';
+        }
+        if (isOpen && iframe && iframe.src === 'about:blank' && urlInput) {
           iframe.src = urlInput.value;
         }
       });
     }
 
     if (refreshBtn && iframe && urlInput) {
-      refreshBtn.addEventListener('click', () => {
+      refreshBtn.addEventListener('click', function () {
         iframe.src = urlInput.value;
       });
     }
 
     if (urlInput && iframe) {
-      urlInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+      urlInput.addEventListener('keydown', function (e) {
+        if (e && e.key === 'Enter') {
           iframe.src = urlInput.value;
         }
       });
     }
 
-    // 6. MutationObserver para estilizar bloques dinámicos
-    domObserver = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        m.addedNodes.forEach((node) => {
-          if (node instanceof HTMLElement) {
-            const toolBlocks = node.querySelectorAll('pre, [class*="tool"]');
-            toolBlocks.forEach((el) => el.classList.add('cc-upgraded-tool-card'));
-          }
-        });
+    function transformDeepSeekDom() {
+      var brandMarks = document.querySelectorAll('[class*="_brandMark"], [class*="_brandIdentity"]');
+      for (var i = 0; i < brandMarks.length; i++) {
+        var el = brandMarks[i];
+        if (el.getAttribute('data-cc-skinned')) continue;
+        el.setAttribute('data-cc-skinned', 'true');
+        var svg = el.querySelector('svg, img');
+        if (svg) svg.style.display = 'none';
+        var star = document.createElement('span');
+        star.className = 'cc-sidebar-claude-mark';
+        star.textContent = '✻';
+        el.prepend(star);
       }
-    });
-    domObserver.observe(document.body, { childList: true, subtree: true });
 
-    // Aplicar a elementos ya existentes en el DOM
-    document.querySelectorAll('pre, [class*="tool"]').forEach((el) => {
-      el.classList.add('cc-upgraded-tool-card');
-    });
+      var brandNames = document.querySelectorAll('[class*="_brandName"]');
+      for (var j = 0; j < brandNames.length; j++) {
+        var bn = brandNames[j];
+        if (bn.getAttribute('data-cc-skinned')) continue;
+        bn.setAttribute('data-cc-skinned', 'true');
+        bn.textContent = 'Claude Code';
+        bn.classList.add('cc-sidebar-claude-text');
+      }
 
-    console.log('[Claude Code Desktop GUI] Inyectado correctamente en DeepSeek Harness.');
+      var heroContainers = document.querySelectorAll('[class*="headline"], [class*="titleGroup"], [class*="Hqq-bq_"]');
+      for (var h = 0; h < heroContainers.length; h++) {
+        var hc = heroContainers[h];
+        if (hc.getAttribute('data-cc-skinned')) continue;
+        hc.setAttribute('data-cc-skinned', 'true');
+
+        var whale = hc.querySelector('[class*="fish"], [class*="whale"], svg');
+        if (whale) whale.style.display = 'none';
+
+        var existingTitle = hc.querySelector('h1, h2, [class*="title"]');
+        if (existingTitle) {
+          existingTitle.innerHTML =
+            '<span class="cc-hero-claude-star">✻</span>' +
+            '<div class="cc-hero-title">Claude Code</div>' +
+            '<div class="cc-hero-subtitle">What can I help you build today?</div>';
+        }
+      }
+
+      var toolEls = document.querySelectorAll('pre, [class*="tool"]');
+      for (var t = 0; t < toolEls.length; t++) {
+        toolEls[t].classList.add('cc-upgraded-tool-card');
+      }
+    }
+
+    transformDeepSeekDom();
+
+    try {
+      domObserver = new MutationObserver(function () {
+        transformDeepSeekDom();
+      });
+      if (document.body) {
+        domObserver.observe(document.body, { childList: true, subtree: true });
+      }
+    } catch (err) {}
+
+    console.log('[Claude Code Desktop GUI] Sistema integrado inyectado correctamente.');
   }
 
-  // Exponer interfaz global en la consola del navegador
   window.dshClaudeCodeDesktop = {
     mount: mountClaudeDesktopUI,
     unmount: unmountClaudeDesktopUI
   };
 
-  // Inicializar al cargar el script
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', mountClaudeDesktopUI);
   } else {
