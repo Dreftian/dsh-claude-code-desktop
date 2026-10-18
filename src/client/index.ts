@@ -45,7 +45,7 @@ export function mountClaudeDesktopUI() {
 
   if (document.getElementById('cc-desktop-styles')) return
 
-  // 1. Inyectar fuentes oficiales (Newsreader Serif, Inter, JetBrains Mono)
+  // 1. Inyectar fuentes oficiales
   if (!document.getElementById('cc-desktop-fonts') && document.head) {
     const fontLink = document.createElement('link')
     fontLink.id = 'cc-desktop-fonts'
@@ -55,7 +55,7 @@ export function mountClaudeDesktopUI() {
     document.head.appendChild(fontLink)
   }
 
-  // 2. Inyectar tokens de tema a nivel sistema
+  // 2. Inyectar estilos del sistema
   const styleTag = document.createElement('style')
   styleTag.id = 'cc-desktop-styles'
   styleTag.textContent = CLAUDE_DESKTOP_CSS
@@ -69,29 +69,28 @@ export function mountClaudeDesktopUI() {
     document.documentElement.setAttribute('data-ds-dark-theme', savedTheme === 'dark' ? 'true' : 'false')
   }
 
-  // 3. Montar barra de controles en el área de título de Windows (sin doble header)
+  // 3. Montar barra de controles en el área de título de Windows
   const header = document.createElement('header')
   header.id = 'cc-system-header'
   header.innerHTML = `
     <div class="cc-header-inner">
-      <div class="cc-brand-badge">
-        <span class="cc-brand-icon">✻</span>
-        <span>Claude Code</span>
+      <button class="cc-nav-icon-btn" id="cc-btn-menu" type="button" title="Alternar barra lateral">≡</button>
+      <button class="cc-nav-icon-btn" id="cc-btn-split" type="button" title="Vista de paneles">◫</button>
+      <button class="cc-nav-icon-btn" id="cc-btn-back" type="button" title="Atrás">←</button>
+      <button class="cc-nav-icon-btn" id="cc-btn-forward" type="button" title="Adelante">→</button>
+      <div class="cc-segmented-control" role="tablist">
+        <button class="cc-seg-item active" id="cc-mode-chat" type="button">💬 Chat</button>
+        <button class="cc-seg-item" id="cc-mode-code" type="button">&lt;/&gt; Code</button>
       </div>
-      <span class="cc-workspace-chip" title="DeepSeek Harness Workspace">dsh · workspace</span>
     </div>
 
     <div class="cc-header-inner">
-      <div class="cc-segmented-control" role="tablist">
-        <button class="cc-seg-item" id="cc-mode-chat" type="button">Chat</button>
-        <button class="cc-seg-item active" id="cc-mode-code" type="button">Code</button>
-      </div>
+      <button class="cc-action-pill" id="cc-plan-upgrade" type="button" style="color:var(--cc-accent); font-weight:600;">
+        <span>Plan Free · Actualizar</span>
+      </button>
       <button class="cc-action-pill" id="cc-permission-pill" data-mode="plan" type="button" title="Atajo: Shift + Tab para alternar">
         <span>🛡️ Plan Mode</span>
       </button>
-    </div>
-
-    <div class="cc-header-inner">
       <button class="cc-action-pill" id="cc-drawer-toggle" type="button">
         <span>⚡ App Preview</span>
       </button>
@@ -133,7 +132,6 @@ export function mountClaudeDesktopUI() {
     permissionPill.addEventListener('click', togglePermissionMode)
   }
 
-  // Atajo oficial: Shift + Tab alterna Plan Mode
   window.addEventListener('keydown', (ev) => {
     if (ev && ev.shiftKey && ev.key === 'Tab') {
       ev.preventDefault()
@@ -201,49 +199,87 @@ export function mountClaudeDesktopUI() {
     })
   }
 
-  // 6. Función de transformación estética de la interfaz nativa DeepSeek
+  // 6. Transformación del DOM de DeepSeek Harness para coincidir 1:1 con Claude Desktop GUI
   const transformDeepSeekDom = () => {
-    // A. Reemplazo del logo y nombre de marca en el Sidebar
-    const brandMarks = document.querySelectorAll('[class*="_brandMark"], [class*="_brandIdentity"]')
-    brandMarks.forEach((el) => {
+    // A. Sidebar Brand: reemplaza el logo de ballena por la estrella ✻ y Claude
+    const brandIdentities = document.querySelectorAll('[class*="_brandIdentity"], [class*="_brandMark"]')
+    brandIdentities.forEach((el) => {
       if (el.getAttribute('data-cc-skinned')) return
       el.setAttribute('data-cc-skinned', 'true')
-      const svg = el.querySelector('svg, img')
-      if (svg) (svg as HTMLElement).style.display = 'none'
-      const star = document.createElement('span')
-      star.className = 'cc-sidebar-claude-mark'
-      star.textContent = '✻'
-      el.prepend(star)
+      el.innerHTML = '<span class="cc-sidebar-claude-mark">✻</span><span class="cc-sidebar-claude-text">Claude</span>'
     })
 
     const brandNames = document.querySelectorAll('[class*="_brandName"]')
     brandNames.forEach((el) => {
       if (el.getAttribute('data-cc-skinned')) return
       el.setAttribute('data-cc-skinned', 'true')
-      el.textContent = 'Claude Code'
+      el.textContent = 'Claude'
       el.classList.add('cc-sidebar-claude-text')
     })
 
-    // B. Reemplazo de la pantalla de bienvenida / Hero central (ballena y texto hacia lo desconocido)
-    const heroHeadline = document.querySelectorAll('[class*="headline"], [class*="titleGroup"], [class*="Hqq-bq_"]')
-    heroHeadline.forEach((container) => {
-      if (container.getAttribute('data-cc-skinned')) return
-      container.setAttribute('data-cc-skinned', 'true')
-
-      const whaleIcon = container.querySelector('[class*="fish"], [class*="whale"], svg')
-      if (whaleIcon) (whaleIcon as HTMLElement).style.display = 'none'
-
-      const existingTitle = container.querySelector('h1, h2, [class*="title"]')
-      if (existingTitle) {
-        existingTitle.innerHTML = `
-          <span class="cc-hero-claude-star">✻</span>
-          <div class="cc-hero-title">Claude Code</div>
-          <div class="cc-hero-subtitle">What can I help you build today?</div>
-        `
+    // Botón _newSession a "+ Nuevo"
+    const newSessionBtns = document.querySelectorAll('[class*="_newSession"]')
+    newSessionBtns.forEach((btn) => {
+      if (btn.getAttribute('data-cc-skinned')) return
+      btn.setAttribute('data-cc-skinned', 'true')
+      for (let i = 0; i < btn.childNodes.length; i++) {
+        const node = btn.childNodes[i]
+        if (node.nodeType === 3 && node.textContent && node.textContent.trim()) {
+          node.textContent = ' + Nuevo'
+        }
       }
     })
 
-    // C. Tarjetas de herramientas y bloques de código
+    // B. Hero Headline: Fila única centrada: ✻ ¿Hora de café y Claude?
+    const headlines = document.querySelectorAll('[class*="Hqq-bq_headline"], [class*="headline"]')
+    headlines.forEach((hl) => {
+      if (hl.getAttribute('data-cc-skinned')) return
+      hl.setAttribute('data-cc-skinned', 'true')
+      hl.innerHTML =
+        '<span class="cc-hero-claude-star">✻</span><span class="cc-hero-title-text">¿Hora de café y Claude?</span>'
+    })
+
+    // C. Píldoras de acción rápida debajo del cajón de composer
+    const composerCards = document.querySelectorAll('[class*="RlGAzG_card"]')
+    composerCards.forEach((card) => {
+      if (card.nextElementSibling && card.nextElementSibling.id === 'cc-action-pills-row') return
+      document.getElementById('cc-action-pills-row')?.remove()
+
+      const pillsRow = document.createElement('div')
+      pillsRow.id = 'cc-action-pills-row'
+      pillsRow.innerHTML = `
+        <button class="cc-hero-pill" type="button" data-prompt="Ayúdame a programar: "><span>&lt;/&gt;</span><span>Programar</span></button>
+        <button class="cc-hero-pill" type="button" data-prompt="Ayúdame a crear: "><span>🎨</span><span>Crear</span></button>
+        <button class="cc-hero-pill" type="button" data-prompt="Quiero aprender sobre: "><span>🎓</span><span>Aprender</span></button>
+        <button class="cc-hero-pill" type="button" data-prompt="Ayúdame a redactar: "><span>✏️</span><span>Escribir</span></button>
+        <button class="cc-hero-pill" type="button" data-prompt="Consejos para mi vida diaria: "><span>☕</span><span>Vida diaria</span></button>
+      `
+
+      pillsRow.querySelectorAll('.cc-hero-pill').forEach((pill) => {
+        pill.addEventListener('click', () => {
+          const prompt = pill.getAttribute('data-prompt') || ''
+          const textarea = document.querySelector('[class*="RlGAzG_card"] textarea, textarea') as HTMLTextAreaElement | null
+          if (textarea) {
+            textarea.value = prompt
+            textarea.focus()
+            textarea.dispatchEvent(new Event('input', { bubbles: true }))
+          }
+        })
+      })
+
+      card.insertAdjacentElement('afterend', pillsRow)
+    })
+
+    // D. Placeholder del Composer
+    const textareas = document.querySelectorAll('[class*="RlGAzG_card"] textarea, textarea')
+    textareas.forEach((ta) => {
+      const input = ta as HTMLTextAreaElement
+      if (input.placeholder && input.placeholder !== '¿Cómo puedo ayudarte hoy?') {
+        input.placeholder = '¿Cómo puedo ayudarte hoy?'
+      }
+    })
+
+    // E. Tarjetas de herramientas y bloques de código
     document.querySelectorAll('pre, [class*="tool"]').forEach((el) => {
       el.classList.add('cc-upgraded-tool-card')
     })
@@ -252,7 +288,7 @@ export function mountClaudeDesktopUI() {
   // Ejecutar transformación inicial
   transformDeepSeekDom()
 
-  // 7. MutationObserver para mantener la transformación en vistas dinámicas
+  // 7. Observer continuo
   try {
     domObserver = new MutationObserver(() => {
       transformDeepSeekDom()
@@ -276,6 +312,7 @@ export function unmountClaudeDesktopUI() {
   document.getElementById('cc-desktop-fonts')?.remove()
   document.getElementById('cc-system-header')?.remove()
   document.getElementById('cc-desktop-drawer')?.remove()
+  document.getElementById('cc-action-pills-row')?.remove()
   if (document.body) {
     document.body.style.marginRight = '0px'
   }

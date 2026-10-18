@@ -11,11 +11,6 @@
       <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#D97757" flood-opacity="0.25"/>
     </filter>
 
-    <filter id="star-glow-car" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="10" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
-
     <!-- Clip path for the desktop window viewport -->
     <clipPath id="car-window-clip">
       <rect x="10" y="10" width="980" height="548" rx="10"/>
@@ -129,32 +124,46 @@
     <g class="carousel-slide-1">
       <rect x="10" y="10" width="980" height="548" fill="#191918"/>
 
-      <!-- Slim Integrated Titlebar -->
+      <!-- Top Bar: [ 💬 Chat | </> Code ] LEFT & Plan Free · Actualizar RIGHT -->
       <rect x="10" y="10" width="980" height="42" fill="#161514" stroke="#2B2A27" stroke-width="1"/>
-      <!-- Left breadcrumb -->
+      
+      <!-- Left: Segmented Control [ 💬 Chat | </> Code ] -->
       <g transform="translate(24, 18)">
-        <rect width="148" height="24" rx="6" fill="#21201E" stroke="#33312D" stroke-width="0.8"/>
-        <circle cx="12" cy="12" r="3" fill="#D97757"/>
-        <text x="22" y="16" class="font-mono" font-size="10.5" fill="#B4B0A5">dsh · DeepSeek GUI</text>
+        <rect width="168" height="26" rx="6" fill="#121211" stroke="#2C2B28" stroke-width="1"/>
+        <rect x="2" y="2" width="80" height="22" rx="5" fill="#282725" stroke="#3F3D38" stroke-width="0.8"/>
+        <text x="42" y="17" class="font-ui" font-size="11" font-weight="700" fill="#FAF9F5" text-anchor="middle">💬 Chat</text>
+        <text x="124" y="17" class="font-ui" font-size="11" font-weight="500" fill="#7D7971" text-anchor="middle">&lt;/&gt; Code</text>
       </g>
-      <!-- Controls -->
-      <g transform="translate(260, 18)">
-        <rect width="136" height="26" rx="6" fill="#121211" stroke="#2C2B28" stroke-width="1"/>
-        <rect x="2" y="2" width="64" height="22" rx="5" fill="#282725" stroke="#3F3D38" stroke-width="0.8"/>
-        <text x="34" y="17" class="font-ui" font-size="11" font-weight="700" fill="#FAF9F5" text-anchor="middle">Chat</text>
-        <text x="100" y="17" class="font-ui" font-size="11" font-weight="500" fill="#7D7971" text-anchor="middle">Code</text>
+
+      <!-- Center Left Actions -->
+      <g transform="translate(202, 18)">
+        <rect width="108" height="25" rx="12.5" fill="#21201E" stroke="#33312D" stroke-width="0.8"/>
+        <circle cx="12" cy="12.5" r="3" fill="#D97757"/>
+        <text x="22" y="16.5" class="font-mono" font-size="10" fill="#B4B0A5">dsh · workspace</text>
       </g>
-      <g transform="translate(412, 18)">
-        <rect width="124" height="25" rx="12.5" fill="#D97757" fill-opacity="0.14" stroke="#D97757" stroke-width="1.2"/>
-        <text x="12" y="16" class="font-ui" font-size="11">🛡️</text>
-        <text x="30" y="16" class="font-ui" font-size="10.5" font-weight="700" fill="#F4957A">Plan Mode</text>
+      <g transform="translate(318, 18)">
+        <rect width="108" height="25" rx="12.5" fill="#D97757" fill-opacity="0.14" stroke="#D97757" stroke-width="1.2"/>
+        <text x="10" y="16.5" class="font-ui" font-size="11">🛡️</text>
+        <text x="28" y="16.5" class="font-ui" font-size="10.5" font-weight="700" fill="#F4957A">Plan Mode</text>
       </g>
-      <g transform="translate(548, 18)">
-        <rect width="116" height="25" rx="12.5" fill="#21201E" stroke="#383632" stroke-width="1"/>
-        <text x="10" y="16" class="font-ui" font-size="11">⚡</text>
-        <text x="28" y="16" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5">App Preview</text>
-        <circle cx="102" cy="12.5" r="3" fill="#52AD68"/>
+      <g transform="translate(434, 18)">
+        <rect width="112" height="25" rx="12.5" fill="#21201E" stroke="#383632" stroke-width="1"/>
+        <text x="10" y="16.5" class="font-ui" font-size="11">⚡</text>
+        <text x="28" y="16.5" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5">App Preview</text>
+        <circle cx="98" cy="12.5" r="3" fill="#52AD68"/>
       </g>
+
+      <!-- Right: Plan Free · Actualizar -->
+      <g transform="translate(686, 18)">
+        <rect width="158" height="26" rx="13" fill="#21201E" stroke="#353430" stroke-width="1"/>
+        <text x="14" y="17" class="font-ui" font-size="10.5" font-weight="500" fill="#B4B0A5">Plan Free</text>
+        <circle cx="70" cy="13" r="1.5" fill="#6A665E"/>
+        <g transform="translate(78, 3)">
+          <rect width="72" height="20" rx="10" fill="#D97757"/>
+          <text x="36" y="13.5" class="font-ui" font-size="10" font-weight="700" fill="#FAF9F5" text-anchor="middle">Actualizar</text>
+        </g>
+      </g>
+
       <!-- Windows Controls (- □ ✕) -->
       <g transform="translate(860, 10)">
         <line x1="14" y1="21" x2="26" y2="21" stroke="#A39F95" stroke-width="1.2"/>
@@ -163,64 +172,79 @@
         <line x1="105" y1="11" x2="95" y2="21" stroke="#A39F95" stroke-width="1.2"/>
       </g>
 
-      <!-- Sidebar -->
+      <!-- Sidebar: + Nuevo, Proyectos, Artefactos, Personalización, Chats -->
       <g transform="translate(10, 52)">
         <rect width="180" height="506" fill="#141413" stroke="#252422" stroke-width="1"/>
-        <g transform="translate(16, 16)">
-          <g transform="translate(10, 12) scale(0.7)" fill="#D97757">
-            <rect x="-2" y="-14" width="4" height="28" rx="2"/>
-            <rect x="-14" y="-2" width="28" height="4" rx="2"/>
-            <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(45)"/>
-            <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(-45)"/>
-          </g>
-          <text x="24" y="17" class="font-ui" font-size="14" font-weight="700" fill="#FAF9F5">Claude Code</text>
-          <g transform="translate(108, 3)">
-            <rect width="44" height="18" rx="4" fill="#D97757" fill-opacity="0.18" stroke="#D97757" stroke-opacity="0.4" stroke-width="0.8"/>
-            <text x="22" y="12.5" class="font-mono" font-size="8" font-weight="700" fill="#E8967D" text-anchor="middle">DESKTOP</text>
-          </g>
+        <!-- Top Button: + Nuevo -->
+        <g transform="translate(14, 14)">
+          <rect width="152" height="34" rx="8" fill="#21201E" stroke="#383632" stroke-width="1"/>
+          <text x="14" y="21.5" class="font-ui" font-size="12" font-weight="700" fill="#FAF9F5">+ Nuevo</text>
+          <rect x="116" y="8" width="24" height="18" rx="4" fill="#161514" stroke="#2E2D2A" stroke-width="0.8"/>
+          <text x="128" y="20.5" class="font-mono" font-size="8.5" fill="#7D7971" text-anchor="middle">⌘K</text>
         </g>
-        <g transform="translate(14, 52)">
-          <rect width="152" height="28" rx="5" fill="#21201E" stroke="#33312D" stroke-width="0.8"/>
-          <text x="14" y="18" class="font-ui" font-size="11" font-weight="600" fill="#FAF9F5">+ New Session</text>
+        <!-- Nav items -->
+        <g transform="translate(14, 60)">
+          <text x="10" y="18" class="font-ui" font-size="11">📁</text>
+          <text x="28" y="18" class="font-ui" font-size="11" font-weight="600" fill="#FAF9F5">Proyectos</text>
+          <text x="10" y="48" class="font-ui" font-size="11">📦</text>
+          <text x="28" y="48" class="font-ui" font-size="11" fill="#A39F95">Artefactos</text>
+          <text x="10" y="78" class="font-ui" font-size="11">🎨</text>
+          <text x="28" y="78" class="font-ui" font-size="11" fill="#A39F95">Personalización</text>
         </g>
-        <text x="16" y="110" class="font-mono" font-size="9" font-weight="700" fill="#6A665E">RECENTS</text>
-        <g transform="translate(14, 120)">
-          <text x="8" y="16" class="font-ui" font-size="10.5">📁</text>
-          <text x="24" y="16" class="font-mono" font-size="9.5" fill="#FAF9F5">src/plugin.ts</text>
-        </g>
-        <g transform="translate(14, 146)">
-          <text x="8" y="16" class="font-ui" font-size="10.5">🎨</text>
-          <text x="24" y="16" class="font-mono" font-size="9.5" fill="#A39F95">claude-desktop.css</text>
+        <line x1="14" y1="156" x2="166" y2="156" stroke="#232220" stroke-width="1"/>
+        <!-- Chats section -->
+        <text x="16" y="178" class="font-mono" font-size="9" font-weight="700" fill="#6A665E" letter-spacing="0.08em">CHATS</text>
+        <g transform="translate(14, 188)">
+          <rect width="152" height="26" rx="5" fill="#D97757" fill-opacity="0.12" stroke="#D97757" stroke-opacity="0.3" stroke-width="0.8"/>
+          <circle cx="12" cy="13" r="3" fill="#D97757"/>
+          <text x="22" y="17" class="font-ui" font-size="10" font-weight="600" fill="#F4957A">DeepSeek Harness</text>
         </g>
       </g>
 
       <!-- Center Hero Workspace -->
       <g transform="translate(190, 52)">
         <rect width="450" height="506" fill="#191918"/>
-        <g transform="translate(225, 110)">
-          <!-- Large Star -->
-          <g transform="scale(1.1)" fill="#D97757">
-            <rect x="-3" y="-28" width="6" height="56" rx="3"/>
-            <rect x="-28" y="-3" width="56" height="6" rx="3"/>
-            <rect x="-3" y="-28" width="6" height="56" rx="3" transform="rotate(45)"/>
-            <rect x="-3" y="-28" width="6" height="56" rx="3" transform="rotate(-45)"/>
-            <circle cx="0" cy="0" r="5" fill="#FAF9F5"/>
-          </g>
-          <text x="0" y="68" class="font-editorial" font-size="34" font-weight="600" fill="#FAF9F5" text-anchor="middle">
-            Claude Code
-          </text>
-          <text x="0" y="96" class="font-editorial" font-size="16.5" font-style="italic" fill="#C4C0B5" text-anchor="middle">
-            What can I help you build today?
+        
+        <!-- 1. Headline: ✻ ¿Hora de café y Claude? -->
+        <g transform="translate(225, 120)">
+          <text class="font-editorial" font-size="28" font-weight="500" fill="#FAF9F5" text-anchor="middle" letter-spacing="-0.01em">
+            <tspan fill="#D97757" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="26">✻ </tspan>¿Hora de café y Claude?
           </text>
         </g>
 
-        <!-- Floating Capsule Composer -->
-        <g transform="translate(20, 390)" filter="url(#composer-shadow-car)">
-          <rect width="410" height="54" rx="20" fill="#21201E" stroke="#3D3B36" stroke-width="1.2"/>
-          <text x="24" y="33" class="font-ui" font-size="12" fill="#7D7971">Ask Claude Code to build, refactor, or test...</text>
-          <g transform="translate(362, 10)">
-            <circle cx="17" cy="17" r="17" fill="#D97757"/>
-            <path d="M 17 10 L 11 17 H 15 V 23 H 19 V 17 H 23 Z" fill="#FAF9F5"/>
+        <!-- 2. Floating Composer Capsule: "¿Cómo puedo ayudarte hoy?" -->
+        <g transform="translate(18, 154)" filter="url(#composer-shadow-car)">
+          <rect width="414" height="58" rx="24" fill="#21201E" stroke="#3D3B36" stroke-width="1.2"/>
+          <circle cx="27" cy="29" r="11" fill="#282623"/>
+          <text x="27" y="33" class="font-ui" font-size="13" text-anchor="middle" fill="#A39F95">+</text>
+          <text x="48" y="34.5" class="font-ui" font-size="13.5" fill="#8C887F">¿Cómo puedo ayudarte hoy?</text>
+          <g transform="translate(366, 11)">
+            <circle cx="18" cy="18" r="18" fill="#D97757"/>
+            <path d="M 18 11 L 12 18 H 16 V 25 H 20 V 18 H 24 Z" fill="#FAF9F5"/>
+          </g>
+        </g>
+
+        <!-- 3. The 5 Action Pills Directly Below Composer -->
+        <g transform="translate(20, 226)">
+          <g transform="translate(0, 0)">
+            <rect width="84" height="28" rx="14" fill="#21201E" stroke="#353430" stroke-width="0.8"/>
+            <text x="42" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5" text-anchor="middle">&lt;/&gt; Programar</text>
+          </g>
+          <g transform="translate(90, 0)">
+            <rect width="66" height="28" rx="14" fill="#21201E" stroke="#353430" stroke-width="0.8"/>
+            <text x="33" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5" text-anchor="middle">🎨 Crear</text>
+          </g>
+          <g transform="translate(162, 0)">
+            <rect width="80" height="28" rx="14" fill="#21201E" stroke="#353430" stroke-width="0.8"/>
+            <text x="40" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5" text-anchor="middle">🎓 Aprender</text>
+          </g>
+          <g transform="translate(248, 0)">
+            <rect width="76" height="28" rx="14" fill="#21201E" stroke="#353430" stroke-width="0.8"/>
+            <text x="38" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5" text-anchor="middle">✏️ Escribir</text>
+          </g>
+          <g transform="translate(330, 0)">
+            <rect width="82" height="28" rx="14" fill="#21201E" stroke="#353430" stroke-width="0.8"/>
+            <text x="41" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5" text-anchor="middle">☕ Vida diaria</text>
           </g>
         </g>
       </g>
@@ -238,7 +262,6 @@
           <circle cx="14" cy="14" r="3" fill="#52AD68"/>
           <text x="24" y="18" class="font-mono" font-size="10" fill="#FAF9F5">http://localhost:3000</text>
         </g>
-        <!-- Mini Preview Viewport -->
         <rect x="16" y="74" width="318" height="380" rx="8" fill="#1E1D1B" stroke="#2E2C29" stroke-width="1"/>
         <g transform="translate(26, 94)">
           <text class="font-ui" font-size="10" font-weight="700" fill="#FAF9F5">⚡ Next.js Analytics App</text>
@@ -254,35 +277,28 @@
     </g>
 
 
-    <!-- ==================== SLIDE 2: PAPER LIGHT MODE (HERO VIEW) ==================== -->
+    <!-- ==================== SLIDE 2: PAPER LIGHT MODE ==================== -->
     <g class="carousel-slide-2">
       <rect x="10" y="10" width="980" height="548" fill="#FAF9F5"/>
 
-      <!-- Slim Integrated Titlebar -->
+      <!-- Top Bar in Light -->
       <rect x="10" y="10" width="980" height="42" fill="#EDEAE0" stroke="#DDD9CE" stroke-width="1"/>
       <g transform="translate(24, 18)">
-        <rect width="148" height="24" rx="6" fill="#E2DFD4" stroke="#D2CEC2" stroke-width="0.8"/>
-        <circle cx="12" cy="12" r="3" fill="#D97757"/>
-        <text x="22" y="16" class="font-mono" font-size="10.5" fill="#5A564E">dsh · DeepSeek GUI</text>
+        <rect width="168" height="26" rx="6" fill="#DDD9CE" stroke="#D0CBC0" stroke-width="1"/>
+        <rect x="2" y="2" width="80" height="22" rx="5" fill="#FAF9F5" stroke="#C9C4B7" stroke-width="0.8"/>
+        <text x="42" y="17" class="font-ui" font-size="11" font-weight="700" fill="#141413" text-anchor="middle">💬 Chat</text>
+        <text x="124" y="17" class="font-ui" font-size="11" font-weight="500" fill="#7A756D" text-anchor="middle">&lt;/&gt; Code</text>
       </g>
-      <g transform="translate(260, 18)">
-        <rect width="136" height="26" rx="6" fill="#DDD9CE" stroke="#D0CBC0" stroke-width="1"/>
-        <rect x="2" y="2" width="64" height="22" rx="5" fill="#FAF9F5" stroke="#C9C4B7" stroke-width="0.8"/>
-        <text x="34" y="17" class="font-ui" font-size="11" font-weight="700" fill="#141413" text-anchor="middle">Chat</text>
-        <text x="100" y="17" class="font-ui" font-size="11" font-weight="500" fill="#7A756D" text-anchor="middle">Code</text>
+      <g transform="translate(686, 18)">
+        <rect width="158" height="26" rx="13" fill="#E4E0D6" stroke="#D2CEC2" stroke-width="1"/>
+        <text x="14" y="17" class="font-ui" font-size="10.5" font-weight="500" fill="#5A564E">Plan Free</text>
+        <circle cx="70" cy="13" r="1.5" fill="#8C887F"/>
+        <g transform="translate(78, 3)">
+          <rect width="72" height="20" rx="10" fill="#D97757"/>
+          <text x="36" y="13.5" class="font-ui" font-size="10" font-weight="700" fill="#FAF9F5" text-anchor="middle">Actualizar</text>
+        </g>
       </g>
-      <g transform="translate(412, 18)">
-        <rect width="124" height="25" rx="12.5" fill="#F6ECE7" stroke="#D97757" stroke-width="1.2"/>
-        <text x="12" y="16" class="font-ui" font-size="11">🛡️</text>
-        <text x="30" y="16" class="font-ui" font-size="10.5" font-weight="700" fill="#C66143">Plan Mode</text>
-      </g>
-      <g transform="translate(548, 18)">
-        <rect width="116" height="25" rx="12.5" fill="#E4E0D6" stroke="#D2CEC2" stroke-width="1"/>
-        <text x="10" y="16" class="font-ui" font-size="11">⚡</text>
-        <text x="28" y="16" class="font-ui" font-size="10.5" font-weight="600" fill="#141413">App Preview</text>
-        <circle cx="102" cy="12.5" r="3" fill="#2E8B46"/>
-      </g>
-      <!-- Windows Controls (- □ ✕) in Light -->
+      <!-- Windows Controls in Light -->
       <g transform="translate(860, 10)">
         <line x1="14" y1="21" x2="26" y2="21" stroke="#5A564E" stroke-width="1.2"/>
         <rect x="55" y="11" width="10" height="10" fill="none" stroke="#5A564E" stroke-width="1.2"/>
@@ -293,60 +309,59 @@
       <!-- Sidebar in Light -->
       <g transform="translate(10, 52)">
         <rect width="180" height="506" fill="#F0EEE6" stroke="#E2DFD6" stroke-width="1"/>
-        <g transform="translate(16, 16)">
-          <g transform="translate(10, 12) scale(0.7)" fill="#D97757">
-            <rect x="-2" y="-14" width="4" height="28" rx="2"/>
-            <rect x="-14" y="-2" width="28" height="4" rx="2"/>
-            <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(45)"/>
-            <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(-45)"/>
-          </g>
-          <text x="24" y="17" class="font-ui" font-size="14" font-weight="700" fill="#141413">Claude Code</text>
-          <g transform="translate(108, 3)">
-            <rect width="44" height="18" rx="4" fill="#F6ECE7" stroke="#E6A691" stroke-width="0.8"/>
-            <text x="22" y="12.5" class="font-mono" font-size="8" font-weight="700" fill="#C66143" text-anchor="middle">DESKTOP</text>
-          </g>
+        <g transform="translate(14, 14)">
+          <rect width="152" height="34" rx="8" fill="#E2DFD4" stroke="#D2CEC2" stroke-width="1"/>
+          <text x="14" y="21.5" class="font-ui" font-size="12" font-weight="700" fill="#141413">+ Nuevo</text>
         </g>
-        <g transform="translate(14, 52)">
-          <rect width="152" height="28" rx="5" fill="#E2DFD4" stroke="#D2CEC2" stroke-width="0.8"/>
-          <text x="14" y="18" class="font-ui" font-size="11" font-weight="600" fill="#141413">+ New Session</text>
-        </g>
-        <text x="16" y="110" class="font-mono" font-size="9" font-weight="700" fill="#8C887F">RECENTS</text>
-        <g transform="translate(14, 120)">
-          <text x="8" y="16" class="font-ui" font-size="10.5">📁</text>
-          <text x="24" y="16" class="font-mono" font-size="9.5" fill="#141413">src/plugin.ts</text>
-        </g>
-        <g transform="translate(14, 146)">
-          <text x="8" y="16" class="font-ui" font-size="10.5">🎨</text>
-          <text x="24" y="16" class="font-mono" font-size="9.5" fill="#5A564E">claude-desktop.css</text>
+        <g transform="translate(14, 60)">
+          <text x="10" y="18" class="font-ui" font-size="11">📁</text>
+          <text x="28" y="18" class="font-ui" font-size="11" font-weight="600" fill="#141413">Proyectos</text>
+          <text x="10" y="48" class="font-ui" font-size="11">📦</text>
+          <text x="28" y="48" class="font-ui" font-size="11" fill="#7A756D">Artefactos</text>
+          <text x="10" y="78" class="font-ui" font-size="11">🎨</text>
+          <text x="28" y="78" class="font-ui" font-size="11" fill="#7A756D">Personalización</text>
         </g>
       </g>
 
-      <!-- Center Hero Workspace in Light -->
+      <!-- Center Hero in Light -->
       <g transform="translate(190, 52)">
         <rect width="450" height="506" fill="#FAF9F5"/>
-        <g transform="translate(225, 110)">
-          <g transform="scale(1.1)" fill="#D97757">
-            <rect x="-3" y="-28" width="6" height="56" rx="3"/>
-            <rect x="-28" y="-3" width="56" height="6" rx="3"/>
-            <rect x="-3" y="-28" width="6" height="56" rx="3" transform="rotate(45)"/>
-            <rect x="-3" y="-28" width="6" height="56" rx="3" transform="rotate(-45)"/>
-            <circle cx="0" cy="0" r="5" fill="#FAF9F5"/>
-          </g>
-          <text x="0" y="68" class="font-editorial" font-size="34" font-weight="600" fill="#141413" text-anchor="middle">
-            Claude Code
-          </text>
-          <text x="0" y="96" class="font-editorial" font-size="16.5" font-style="italic" fill="#5A564E" text-anchor="middle">
-            What can I help you build today?
+        <g transform="translate(225, 120)">
+          <text class="font-editorial" font-size="28" font-weight="500" fill="#141413" text-anchor="middle" letter-spacing="-0.01em">
+            <tspan fill="#D97757" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="26">✻ </tspan>¿Hora de café y Claude?
           </text>
         </g>
-
-        <!-- Floating Capsule Composer in Light -->
-        <g transform="translate(20, 390)" filter="drop-shadow(0 3px 6px rgba(0,0,0,0.08))">
-          <rect width="410" height="54" rx="20" fill="#FFFFFF" stroke="#DCD8CD" stroke-width="1.2"/>
-          <text x="24" y="33" class="font-ui" font-size="12" fill="#7A756D">Ask Claude Code to build, refactor, or test...</text>
-          <g transform="translate(362, 10)">
-            <circle cx="17" cy="17" r="17" fill="#D97757"/>
-            <path d="M 17 10 L 11 17 H 15 V 23 H 19 V 17 H 23 Z" fill="#FAF9F5"/>
+        <g transform="translate(18, 154)" filter="drop-shadow(0 2px 5px rgba(0,0,0,0.06))">
+          <rect width="414" height="58" rx="24" fill="#FFFFFF" stroke="#DCD8CD" stroke-width="1.2"/>
+          <circle cx="27" cy="29" r="11" fill="#F0EEE6"/>
+          <text x="27" y="33" class="font-ui" font-size="13" text-anchor="middle" fill="#5A564E">+</text>
+          <text x="48" y="34.5" class="font-ui" font-size="13.5" fill="#7A756D">¿Cómo puedo ayudarte hoy?</text>
+          <g transform="translate(366, 11)">
+            <circle cx="18" cy="18" r="18" fill="#D97757"/>
+            <path d="M 18 11 L 12 18 H 16 V 25 H 20 V 18 H 24 Z" fill="#FAF9F5"/>
+          </g>
+        </g>
+        <!-- 5 Action Pills in Light -->
+        <g transform="translate(20, 226)">
+          <g transform="translate(0, 0)">
+            <rect width="84" height="28" rx="14" fill="#F3F1E9" stroke="#DDD9CE" stroke-width="0.8"/>
+            <text x="42" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#141413" text-anchor="middle">&lt;/&gt; Programar</text>
+          </g>
+          <g transform="translate(90, 0)">
+            <rect width="66" height="28" rx="14" fill="#F3F1E9" stroke="#DDD9CE" stroke-width="0.8"/>
+            <text x="33" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#141413" text-anchor="middle">🎨 Crear</text>
+          </g>
+          <g transform="translate(162, 0)">
+            <rect width="80" height="28" rx="14" fill="#F3F1E9" stroke="#DDD9CE" stroke-width="0.8"/>
+            <text x="40" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#141413" text-anchor="middle">🎓 Aprender</text>
+          </g>
+          <g transform="translate(248, 0)">
+            <rect width="76" height="28" rx="14" fill="#F3F1E9" stroke="#DDD9CE" stroke-width="0.8"/>
+            <text x="38" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#141413" text-anchor="middle">✏️ Escribir</text>
+          </g>
+          <g transform="translate(330, 0)">
+            <rect width="82" height="28" rx="14" fill="#F3F1E9" stroke="#DDD9CE" stroke-width="0.8"/>
+            <text x="41" y="18" class="font-ui" font-size="10.5" font-weight="600" fill="#141413" text-anchor="middle">☕ Vida diaria</text>
           </g>
         </g>
       </g>
@@ -436,7 +451,7 @@
           <rect x="320" y="-12" width="86" height="18" rx="4" fill="#17261B"/>
           <text x="363" y="0" class="font-mono" font-size="8" fill="#52AD68" text-anchor="middle">● 60 FPS · LIVE</text>
           <rect x="0" y="24" width="128" height="56" rx="6" fill="#2A2825"/>
-          <text x="10" y="44" class="font-ui" font-size="8" fill="#8C887F">Active Users</text>
+          <text x="10" y="44" class="font-ui" font-size="8" fill="#8C887F">Active Requests</text>
           <text x="10" y="66" class="font-mono" font-size="15" font-weight="700" fill="#FAF9F5">128,400</text>
         </g>
       </g>

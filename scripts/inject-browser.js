@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         dsh-claude-code-desktop Hot Injector
 // @namespace    https://github.com/deepseek-ai/dsh
-// @version      2.0.0
+// @version      3.0.0
 // @description  Hot-inject Claude Code Desktop GUI theme and controls into DeepSeek Harness web UI
 // @author       dsh-claude-code-desktop
 // @match        http://localhost:3080/*
@@ -23,7 +23,7 @@
 
   var CLAUDE_DESKTOP_CSS = `
   /* ==========================================================================
-     Anthropic Claude Code Desktop - System-Level Theme Tokens for DeepSeek Harness
+     Anthropic Claude Code Desktop - Exact GUI Theme System for DeepSeek Harness
      ========================================================================== */
 
   :root,
@@ -36,7 +36,7 @@
     --dsw-alias-bg-layer-3: #2C2B28 !important;
     --dsw-alias-bg-module-platform: #191918 !important;
 
-    --dsw-specific-input-major: #23221F !important;
+    --dsw-specific-input-major: #1F1E1B !important;
     --dsw-specific-selector: #292825 !important;
     --dsw-specific-bubble: #21201E !important;
     --dsw-specific-sidebar-nav-item-active: #292825 !important;
@@ -69,12 +69,12 @@
     --cc-bg-surface: #21201E;
     --cc-bg-surface-hover: #292825;
     --cc-bg-elevated: #2C2B28;
-    --cc-bg-composer: #23221F;
-    --cc-border: #353430;
+    --cc-bg-composer: #1F1E1B;
+    --cc-border: #33322E;
     --cc-border-subtle: #282724;
-    --cc-text-primary: #F4F3EE;
+    --cc-text-primary: #FAF9F5;
     --cc-text-secondary: #A8A6A0;
-    --cc-text-muted: #787670;
+    --cc-text-muted: #7E7C75;
     --cc-accent: #D97757;
     --cc-accent-hover: #C66143;
     --cc-accent-soft: rgba(217, 119, 87, 0.14);
@@ -83,7 +83,7 @@
     --cc-auto-bg: rgba(74, 222, 128, 0.12);
     --cc-auto-border: rgba(74, 222, 128, 0.4);
     --cc-auto-text: #4ADE80;
-    --cc-shadow-composer: 0 12px 32px -6px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --cc-shadow-composer: 0 8px 30px rgba(0, 0, 0, 0.45);
     --cc-shadow-card: 0 4px 14px rgba(0, 0, 0, 0.22);
   }
 
@@ -140,7 +140,7 @@
     --cc-auto-bg: rgba(22, 163, 74, 0.1);
     --cc-auto-border: rgba(22, 163, 74, 0.35);
     --cc-auto-text: #16A34A;
-    --cc-shadow-composer: 0 10px 28px -6px rgba(20, 20, 19, 0.09), 0 2px 6px rgba(20, 20, 19, 0.04);
+    --cc-shadow-composer: 0 8px 24px rgba(0, 0, 0, 0.08);
     --cc-shadow-card: 0 2px 10px rgba(20, 20, 19, 0.05);
   }
 
@@ -156,9 +156,66 @@
     transition: margin-right 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
+  .Hqq-bq_root,
+  .Hqq-bq_stack,
+  .RlGAzG_hero,
+  [class*="Hqq-bq_root"],
+  [class*="Hqq-bq_stack"],
+  [class*="RlGAzG_hero"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .Hqq-bq_body,
+  .Hqq-bq_fishHitbox,
+  .Hqq-bq_fish,
+  [class*="Hqq-bq_body"],
+  [class*="Hqq-bq_fishHitbox"],
+  [class*="Hqq-bq_fish"],
+  [class*="fishHitbox"],
+  [class*="whale"] {
+    display: none !important;
+  }
+
+  [class*="menuBar"],
+  [class*="windowMenu"] {
+    display: none !important;
+  }
+
   aside, nav, [class*="sidebar"], [class*="Sidebar"] {
     background-color: var(--cc-bg-sidebar) !important;
     border-right: 1px solid var(--cc-border-subtle) !important;
+  }
+
+  .Hqq-bq_headline,
+  [class*="Hqq-bq_headline"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 14px !important;
+    margin-bottom: 30px !important;
+    background: transparent !important;
+    border: none !important;
+  }
+
+  .cc-hero-claude-star {
+    font-size: 38px !important;
+    color: var(--cc-accent) !important;
+    line-height: 1 !important;
+    font-weight: 700 !important;
+    display: inline-block !important;
+  }
+
+  .cc-hero-title-text {
+    font-family: 'Newsreader', Georgia, 'Times New Roman', serif !important;
+    font-size: 38px !important;
+    font-weight: 400 !important;
+    color: var(--cc-text-primary) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em !important;
+    display: inline-block !important;
   }
 
   [class*="markdown"] p,
@@ -191,21 +248,26 @@
     border-color: var(--cc-accent) !important;
   }
 
-  [class*="RlGAzG_card"],
-  [class*="composer"],
-  div[class*="card"]:has(textarea) {
+  [class*="RlGAzG_card"] {
+    max-width: 720px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
     background-color: var(--cc-bg-composer) !important;
     border: 1px solid var(--cc-border) !important;
-    border-radius: 20px !important;
+    border-radius: 16px !important;
     box-shadow: var(--cc-shadow-composer) !important;
     transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
   }
 
-  [class*="RlGAzG_card"]:focus-within,
-  [class*="composer"]:focus-within,
-  div[class*="card"]:has(textarea:focus) {
+  [class*="RlGAzG_card"]:focus-within {
     border-color: var(--cc-accent) !important;
     box-shadow: 0 0 0 2px var(--cc-accent-soft), var(--cc-shadow-composer) !important;
+  }
+
+  [class*="RlGAzG_card"] textarea::placeholder,
+  [class*="RlGAzG_input"]::placeholder {
+    color: var(--cc-text-muted) !important;
+    font-size: 15px !important;
   }
 
   [class*="RlGAzG_primary"],
@@ -225,17 +287,94 @@
     transform: translateY(-1px) !important;
   }
 
+  #cc-action-pills-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cc-hero-pill {
+    border-radius: 999px;
+    background: #21201E;
+    border: 1px solid #2F2E2A;
+    color: #C5C3BC;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  [data-claude-theme="light"] .cc-hero-pill {
+    background: #F0EEE6;
+    border: 1px solid #E2DFD6;
+    color: #5C5B57;
+  }
+
+  .cc-hero-pill:hover {
+    background: #2C2B27;
+    border-color: #D97757;
+    color: #FAF9F5;
+    transform: translateY(-1px);
+  }
+
+  [data-claude-theme="light"] .cc-hero-pill:hover {
+    background: #EAE7DD;
+    border-color: #D97757;
+    color: #141413;
+  }
+
+  .cc-sidebar-claude-mark {
+    color: var(--cc-accent) !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-weight: 700 !important;
+    margin-right: 8px !important;
+  }
+
+  .cc-sidebar-claude-text {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    color: var(--cc-text-primary) !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  [class*="_newSession"] {
+    background-color: var(--cc-bg-surface) !important;
+    border: 1px solid var(--cc-border) !important;
+    border-radius: 8px !important;
+    color: var(--cc-text-primary) !important;
+    font-weight: 500 !important;
+  }
+
+  [class*="_newSession"]:hover {
+    background-color: var(--cc-bg-surface-hover) !important;
+    border-color: var(--cc-accent) !important;
+  }
+
   #cc-system-header {
     position: fixed;
     top: 0;
-    left: 230px;
+    left: 18px;
     right: 140px;
     height: 38px;
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 12px;
     pointer-events: none;
     -webkit-app-region: drag;
     user-select: none;
@@ -245,35 +384,29 @@
   .cc-header-inner {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     pointer-events: auto;
     -webkit-app-region: no-drag;
   }
 
-  .cc-brand-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--cc-text-primary);
-  }
-
-  .cc-brand-icon {
-    color: var(--cc-accent);
-    font-size: 16px;
-    line-height: 1;
-    font-weight: 700;
-  }
-
-  .cc-workspace-chip {
-    font-size: 11px;
-    color: var(--cc-text-secondary);
-    background-color: var(--cc-bg-surface);
-    border: 1px solid var(--cc-border);
-    padding: 2px 8px;
+  .cc-nav-icon-btn {
+    width: 28px;
+    height: 28px;
     border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace;
+    border: none;
+    background: transparent;
+    color: var(--cc-text-secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .cc-nav-icon-btn:hover {
+    background-color: var(--cc-bg-surface-hover);
+    color: var(--cc-text-primary);
   }
 
   .cc-segmented-control {
@@ -332,46 +465,6 @@
     background-color: var(--cc-auto-bg);
     border-color: var(--cc-auto-border);
     color: var(--cc-auto-text);
-  }
-
-  .cc-sidebar-claude-mark {
-    color: var(--cc-accent) !important;
-    font-size: 20px !important;
-    line-height: 1 !important;
-    display: inline-block !important;
-    font-weight: 700 !important;
-  }
-
-  .cc-sidebar-claude-text {
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    color: var(--cc-text-primary) !important;
-    letter-spacing: -0.01em !important;
-  }
-
-  .cc-hero-claude-star {
-    font-size: 52px !important;
-    color: var(--cc-accent) !important;
-    display: block !important;
-    margin: 0 auto 12px auto !important;
-    line-height: 1 !important;
-  }
-
-  .cc-hero-title {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 26px !important;
-    font-weight: 600 !important;
-    letter-spacing: -0.02em !important;
-    color: var(--cc-text-primary) !important;
-    margin-bottom: 6px !important;
-  }
-
-  .cc-hero-subtitle {
-    font-family: 'Newsreader', Georgia, serif !important;
-    font-size: 16px !important;
-    font-style: italic !important;
-    color: var(--cc-text-secondary) !important;
-    margin-bottom: 24px !important;
   }
 
   #cc-desktop-drawer {
@@ -464,6 +557,7 @@
     var f = document.getElementById('cc-desktop-fonts'); if (f) f.remove();
     var h = document.getElementById('cc-system-header'); if (h) h.remove();
     var d = document.getElementById('cc-desktop-drawer'); if (d) d.remove();
+    var p = document.getElementById('cc-action-pills-row'); if (p) p.remove();
     if (document.body) {
       document.body.style.marginRight = '0px';
     }
@@ -513,24 +607,23 @@
     header.id = 'cc-system-header';
     header.innerHTML = `
       <div class="cc-header-inner">
-        <div class="cc-brand-badge">
-          <span class="cc-brand-icon">✻</span>
-          <span>Claude Code</span>
+        <button class="cc-nav-icon-btn" id="cc-btn-menu" type="button" title="Alternar barra lateral">≡</button>
+        <button class="cc-nav-icon-btn" id="cc-btn-split" type="button" title="Vista de paneles">◫</button>
+        <button class="cc-nav-icon-btn" id="cc-btn-back" type="button" title="Atrás">←</button>
+        <button class="cc-nav-icon-btn" id="cc-btn-forward" type="button" title="Adelante">→</button>
+        <div class="cc-segmented-control" role="tablist">
+          <button class="cc-seg-item active" id="cc-mode-chat" type="button">💬 Chat</button>
+          <button class="cc-seg-item" id="cc-mode-code" type="button">&lt;/&gt; Code</button>
         </div>
-        <span class="cc-workspace-chip" title="DeepSeek Harness Workspace">dsh · workspace</span>
       </div>
 
       <div class="cc-header-inner">
-        <div class="cc-segmented-control" role="tablist">
-          <button class="cc-seg-item" id="cc-mode-chat" type="button">Chat</button>
-          <button class="cc-seg-item active" id="cc-mode-code" type="button">Code</button>
-        </div>
+        <button class="cc-action-pill" id="cc-plan-upgrade" type="button" style="color:var(--cc-accent); font-weight:600;">
+          <span>Plan Free · Actualizar</span>
+        </button>
         <button class="cc-action-pill" id="cc-permission-pill" data-mode="plan" type="button" title="Atajo: Shift + Tab para alternar">
           <span>🛡️ Plan Mode</span>
         </button>
-      </div>
-
-      <div class="cc-header-inner">
         <button class="cc-action-pill" id="cc-drawer-toggle" type="button">
           <span>⚡ App Preview</span>
         </button>
@@ -636,17 +729,12 @@
     }
 
     function transformDeepSeekDom() {
-      var brandMarks = document.querySelectorAll('[class*="_brandMark"], [class*="_brandIdentity"]');
-      for (var i = 0; i < brandMarks.length; i++) {
-        var el = brandMarks[i];
+      var brandIdentities = document.querySelectorAll('[class*="_brandIdentity"], [class*="_brandMark"]');
+      for (var i = 0; i < brandIdentities.length; i++) {
+        var el = brandIdentities[i];
         if (el.getAttribute('data-cc-skinned')) continue;
         el.setAttribute('data-cc-skinned', 'true');
-        var svg = el.querySelector('svg, img');
-        if (svg) svg.style.display = 'none';
-        var star = document.createElement('span');
-        star.className = 'cc-sidebar-claude-mark';
-        star.textContent = '✻';
-        el.prepend(star);
+        el.innerHTML = '<span class="cc-sidebar-claude-mark">✻</span><span class="cc-sidebar-claude-text">Claude</span>';
       }
 
       var brandNames = document.querySelectorAll('[class*="_brandName"]');
@@ -654,25 +742,71 @@
         var bn = brandNames[j];
         if (bn.getAttribute('data-cc-skinned')) continue;
         bn.setAttribute('data-cc-skinned', 'true');
-        bn.textContent = 'Claude Code';
+        bn.textContent = 'Claude';
         bn.classList.add('cc-sidebar-claude-text');
       }
 
-      var heroContainers = document.querySelectorAll('[class*="headline"], [class*="titleGroup"], [class*="Hqq-bq_"]');
-      for (var h = 0; h < heroContainers.length; h++) {
-        var hc = heroContainers[h];
-        if (hc.getAttribute('data-cc-skinned')) continue;
-        hc.setAttribute('data-cc-skinned', 'true');
+      var newSessionBtns = document.querySelectorAll('[class*="_newSession"]');
+      for (var s = 0; s < newSessionBtns.length; s++) {
+        var btn = newSessionBtns[s];
+        if (btn.getAttribute('data-cc-skinned')) continue;
+        btn.setAttribute('data-cc-skinned', 'true');
+        for (var cn = 0; cn < btn.childNodes.length; cn++) {
+          var node = btn.childNodes[cn];
+          if (node.nodeType === 3 && node.textContent && node.textContent.trim()) {
+            node.textContent = ' + Nuevo';
+          }
+        }
+      }
 
-        var whale = hc.querySelector('[class*="fish"], [class*="whale"], svg');
-        if (whale) whale.style.display = 'none';
+      var headlines = document.querySelectorAll('[class*="Hqq-bq_headline"], [class*="headline"]');
+      for (var h = 0; h < headlines.length; h++) {
+        var hl = headlines[h];
+        if (hl.getAttribute('data-cc-skinned')) continue;
+        hl.setAttribute('data-cc-skinned', 'true');
+        hl.innerHTML =
+          '<span class="cc-hero-claude-star">✻</span><span class="cc-hero-title-text">¿Hora de café y Claude?</span>';
+      }
 
-        var existingTitle = hc.querySelector('h1, h2, [class*="title"]');
-        if (existingTitle) {
-          existingTitle.innerHTML =
-            '<span class="cc-hero-claude-star">✻</span>' +
-            '<div class="cc-hero-title">Claude Code</div>' +
-            '<div class="cc-hero-subtitle">What can I help you build today?</div>';
+      var composerCards = document.querySelectorAll('[class*="RlGAzG_card"]');
+      for (var c = 0; c < composerCards.length; c++) {
+        var card = composerCards[c];
+        if (card.nextElementSibling && card.nextElementSibling.id === 'cc-action-pills-row') continue;
+        var oldRow = document.getElementById('cc-action-pills-row');
+        if (oldRow) oldRow.remove();
+
+        var pillsRow = document.createElement('div');
+        pillsRow.id = 'cc-action-pills-row';
+        pillsRow.innerHTML =
+          '<button class="cc-hero-pill" type="button" data-prompt="Ayúdame a programar: "><span>&lt;/&gt;</span><span>Programar</span></button>' +
+          '<button class="cc-hero-pill" type="button" data-prompt="Ayúdame a crear: "><span>🎨</span><span>Crear</span></button>' +
+          '<button class="cc-hero-pill" type="button" data-prompt="Quiero aprender sobre: "><span>🎓</span><span>Aprender</span></button>' +
+          '<button class="cc-hero-pill" type="button" data-prompt="Ayúdame a redactar: "><span>✏️</span><span>Escribir</span></button>' +
+          '<button class="cc-hero-pill" type="button" data-prompt="Consejos para mi vida diaria: "><span>☕</span><span>Vida diaria</span></button>';
+
+        var pillBtns = pillsRow.querySelectorAll('.cc-hero-pill');
+        for (var p = 0; p < pillBtns.length; p++) {
+          (function (pill) {
+            pill.addEventListener('click', function () {
+              var prompt = pill.getAttribute('data-prompt') || '';
+              var textarea = document.querySelector('[class*="RlGAzG_card"] textarea, textarea');
+              if (textarea) {
+                textarea.value = prompt;
+                textarea.focus();
+                textarea.dispatchEvent(new Event('input', { bubbles: true }));
+              }
+            });
+          })(pillBtns[p]);
+        }
+
+        card.insertAdjacentElement('afterend', pillsRow);
+      }
+
+      var textareas = document.querySelectorAll('[class*="RlGAzG_card"] textarea, textarea');
+      for (var ta = 0; ta < textareas.length; ta++) {
+        var input = textareas[ta];
+        if (input.placeholder && input.placeholder !== '¿Cómo puedo ayudarte hoy?') {
+          input.placeholder = '¿Cómo puedo ayudarte hoy?';
         }
       }
 
@@ -693,7 +827,7 @@
       }
     } catch (err) {}
 
-    console.log('[Claude Code Desktop GUI] Sistema integrado inyectado correctamente.');
+    console.log('[Claude Code Desktop GUI] Inyección de diseño 1:1 lista.');
   }
 
   window.dshClaudeCodeDesktop = {
