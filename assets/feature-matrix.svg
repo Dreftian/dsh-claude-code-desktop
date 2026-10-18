@@ -1,0 +1,246 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320" fill="none">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bg-grad-matrix" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D1C1B"/>
+      <stop offset="50%" stop-color="#191918"/>
+      <stop offset="100%" stop-color="#131312"/>
+    </linearGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="grid-pattern-matrix" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#FAF9F5" stroke-opacity="0.025" stroke-width="1"/>
+    </pattern>
+
+    <!-- Drop Shadows -->
+    <filter id="matrix-card-shadow" x="-8%" y="-6%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <style>
+    .font-ui { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .font-editorial { font-family: 'Newsreader', Georgia, 'Times New Roman', serif; }
+    .font-mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
+  </style>
+
+  <!-- Base Canvas -->
+  <rect width="1000" height="320" rx="16" fill="url(#bg-grad-matrix)"/>
+  <rect width="1000" height="320" rx="16" fill="url(#grid-pattern-matrix)"/>
+  <rect x="1" y="1" width="998" height="318" rx="15" fill="none" stroke="#FAF9F5" stroke-opacity="0.09" stroke-width="1.2"/>
+
+  <!-- Header Section -->
+  <g transform="translate(36, 22)">
+    <rect width="180" height="22" rx="11" fill="#D97757" fill-opacity="0.12" stroke="#D97757" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="10" y="15" class="font-mono" font-size="10" font-weight="700" fill="#E8967D" letter-spacing="0.08em">DESIGN &amp; DESKTOP CAPABILITIES</text>
+
+    <!-- Header Title -->
+    <text x="0" y="46" class="font-ui" font-size="20" font-weight="700" fill="#FAF9F5" letter-spacing="-0.02em">
+      Engineered for Editorial Focus and Real-Time Speed
+    </text>
+
+    <!-- Subtitle -->
+    <text x="590" y="46" class="font-editorial" font-size="14.5" font-style="italic" fill="#A8A49A">
+      Purpose-built desktop affordances tailored for DeepSeek Harness
+    </text>
+  </g>
+
+  <!-- ==================== 4 FEATURE CARDS ==================== -->
+
+  <!-- CARD 1: Dual Warm Colorway -->
+  <g transform="translate(36, 80)" filter="url(#matrix-card-shadow)">
+    <rect width="217" height="216" rx="12" fill="#21201E" stroke="#353430" stroke-width="1"/>
+    <!-- Top accent dot -->
+    <circle cx="20" cy="22" r="3.5" fill="#D97757"/>
+    <text x="32" y="26" class="font-mono" font-size="9.5" font-weight="700" fill="#E8967D">01 · COLOR PALETTE</text>
+
+    <text x="18" y="52" class="font-ui" font-size="15" font-weight="700" fill="#FAF9F5">Dual Warm Colorway</text>
+
+    <!-- Visual Demonstration: Split Pill & Swatches -->
+    <g transform="translate(18, 66)">
+      <!-- Split Pill Preview -->
+      <g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">
+        <!-- Dark half -->
+        <path d="M 16 0 H 90 V 42 H 16 A 21 21 0 0 1 16 0 Z" fill="#191918" stroke="#383632" stroke-width="1"/>
+        <!-- Light half -->
+        <path d="M 90 0 H 164 A 21 21 0 0 1 164 42 H 90 V 0 Z" fill="#FAF9F5" stroke="#DDD9CE" stroke-width="1"/>
+        
+        <circle cx="24" cy="21" r="5" fill="#D97757"/>
+        <text x="34" y="25" class="font-mono" font-size="9" font-weight="600" fill="#FAF9F5">#191918</text>
+
+        <circle cx="156" cy="21" r="5" fill="#141413"/>
+        <text x="146" y="25" class="font-mono" font-size="9" font-weight="600" fill="#141413" text-anchor="end">#FAF9F5</text>
+      </g>
+
+      <!-- Mini Swatch Row -->
+      <g transform="translate(4, 52)">
+        <rect x="0" y="0" width="38" height="18" rx="4" fill="#191918" stroke="#3D3B37" stroke-width="0.8"/>
+        <text x="19" y="12" class="font-mono" font-size="7.5" fill="#B4B0A5" text-anchor="middle">Dark</text>
+
+        <rect x="44" y="0" width="38" height="18" rx="4" fill="#FAF9F5" stroke="#CFCBC0" stroke-width="0.8"/>
+        <text x="63" y="12" class="font-mono" font-size="7.5" fill="#141413" text-anchor="middle">Paper</text>
+
+        <rect x="88" y="0" width="38" height="18" rx="4" fill="#D97757"/>
+        <text x="107" y="12" class="font-mono" font-size="7.5" fill="#FFFFFF" text-anchor="middle">Accent</text>
+
+        <rect x="132" y="0" width="42" height="18" rx="4" fill="#21201E" stroke="#353430" stroke-width="0.8"/>
+        <text x="153" y="12" class="font-mono" font-size="7.5" fill="#52AD68" text-anchor="middle">Auto</text>
+      </g>
+    </g>
+
+    <!-- Description -->
+    <text x="18" y="162" class="font-ui" font-size="10.5" fill="#B4B0A5">
+      Anthropic Dark reduces fatigue;
+    </text>
+    <text x="18" y="177" class="font-ui" font-size="10.5" fill="#B4B0A5">
+      Paper Light captures print tone.
+    </text>
+    <text x="18" y="196" class="font-mono" font-size="9" fill="#D97757">
+      localStorage auto-persistence
+    </text>
+  </g>
+
+  <!-- CARD 2: Editorial Typography -->
+  <g transform="translate(273, 80)" filter="url(#matrix-card-shadow)">
+    <rect width="217" height="216" rx="12" fill="#21201E" stroke="#353430" stroke-width="1"/>
+    <!-- Top accent dot -->
+    <circle cx="20" cy="22" r="3.5" fill="#D97757"/>
+    <text x="32" y="26" class="font-mono" font-size="9.5" font-weight="700" fill="#E8967D">02 · TYPOGRAPHY</text>
+
+    <text x="18" y="52" class="font-ui" font-size="15" font-weight="700" fill="#FAF9F5">Editorial Typography</text>
+
+    <!-- Visual Demonstration: Typographic Specimen -->
+    <g transform="translate(18, 66)">
+      <rect width="181" height="74" rx="8" fill="#161514" stroke="#2D2B28" stroke-width="1"/>
+
+      <!-- Newsreader Specimen -->
+      <g transform="translate(14, 28)">
+        <text class="font-editorial" font-size="28" font-style="italic" fill="#FAF9F5">Aa</text>
+        <text x="44" y="-8" class="font-ui" font-size="9" font-weight="600" fill="#D97757">Newsreader</text>
+        <text x="44" y="4" class="font-editorial" font-size="10" font-style="italic" fill="#A8A49A">Editorial prose</text>
+      </g>
+
+      <!-- Inter + Mono Mini specimens -->
+      <g transform="translate(14, 58)">
+        <text class="font-ui" font-size="13" font-weight="700" fill="#FAF9F5">Inter UI</text>
+        <text x="56" y="0" class="font-ui" font-size="8.5" fill="#6A665E">· Controls</text>
+        <text x="104" y="0" class="font-mono" font-size="11" font-weight="600" fill="#52AD68">&gt;_ Mono</text>
+      </g>
+    </g>
+
+    <!-- Description -->
+    <text x="18" y="162" class="font-ui" font-size="10.5" fill="#B4B0A5">
+      Refined serif for assistant reading,
+    </text>
+    <text x="18" y="177" class="font-ui" font-size="10.5" fill="#B4B0A5">
+      clean sans UI &amp; ligatures in code.
+    </text>
+    <text x="18" y="196" class="font-mono" font-size="9" fill="#D97757">
+      Newsreader + Inter + JetBrains
+    </text>
+  </g>
+
+  <!-- CARD 3: Plan Mode Switch -->
+  <g transform="translate(510, 80)" filter="url(#matrix-card-shadow)">
+    <rect width="217" height="216" rx="12" fill="#21201E" stroke="#353430" stroke-width="1"/>
+    <!-- Top accent dot -->
+    <circle cx="20" cy="22" r="3.5" fill="#D97757"/>
+    <text x="32" y="26" class="font-mono" font-size="9.5" font-weight="700" fill="#E8967D">03 · INTERACTION</text>
+
+    <text x="18" y="52" class="font-ui" font-size="15" font-weight="700" fill="#FAF9F5">Plan Mode Switch</text>
+
+    <!-- Visual Demonstration: Hotkey + Mode Toggle Pill -->
+    <g transform="translate(18, 66)">
+      <rect width="181" height="74" rx="8" fill="#161514" stroke="#2D2B28" stroke-width="1"/>
+
+      <!-- Keyboard shortcut pills -->
+      <g transform="translate(14, 14)">
+        <rect x="0" y="0" width="46" height="20" rx="4" fill="#262522" stroke="#42403B" stroke-width="1"/>
+        <text x="23" y="14" class="font-mono" font-size="9" font-weight="700" fill="#FAF9F5" text-anchor="middle">Shift</text>
+
+        <text x="52" y="15" class="font-ui" font-size="12" fill="#6A665E">+</text>
+
+        <rect x="64" y="0" width="40" height="20" rx="4" fill="#262522" stroke="#42403B" stroke-width="1"/>
+        <text x="84" y="14" class="font-mono" font-size="9" font-weight="700" fill="#FAF9F5" text-anchor="middle">Tab</text>
+
+        <!-- Global tag -->
+        <rect x="114" y="2" width="38" height="16" rx="3" fill="#D97757" fill-opacity="0.15"/>
+        <text x="133" y="13" class="font-mono" font-size="8" font-weight="600" fill="#E8967D" text-anchor="middle">KEY</text>
+      </g>
+
+      <!-- Toggle Switch Visual -->
+      <g transform="translate(14, 44)">
+        <rect x="0" y="0" width="153" height="22" rx="11" fill="#100F0F" stroke="#33312E" stroke-width="1"/>
+        <!-- Active Plan Mode side -->
+        <rect x="2" y="2" width="82" height="18" rx="9" fill="#D97757" fill-opacity="0.25" stroke="#D97757" stroke-width="0.8"/>
+        <text x="43" y="14" class="font-ui" font-size="8.5" font-weight="700" fill="#FAF9F5" text-anchor="middle">🛡️ Plan Mode</text>
+
+        <!-- Inactive side -->
+        <text x="118" y="14" class="font-ui" font-size="8.5" fill="#6A665E" text-anchor="middle">⚡ Auto</text>
+      </g>
+    </g>
+
+    <!-- Description -->
+    <text x="18" y="162" class="font-ui" font-size="10.5" fill="#B4B0A5">
+      Toggle between guarded planning
+    </text>
+    <text x="18" y="177" class="font-ui" font-size="10.5" fill="#B4B0A5">
+      and autonomous tool execution.
+    </text>
+    <text x="18" y="196" class="font-mono" font-size="9" fill="#D97757">
+      Shift + Tab global hotkey
+    </text>
+  </g>
+
+  <!-- CARD 4: Live Preview Drawer -->
+  <g transform="translate(747, 80)" filter="url(#matrix-card-shadow)">
+    <rect width="217" height="216" rx="12" fill="#21201E" stroke="#353430" stroke-width="1"/>
+    <!-- Top accent dot -->
+    <circle cx="20" cy="22" r="3.5" fill="#D97757"/>
+    <text x="32" y="26" class="font-mono" font-size="9.5" font-weight="700" fill="#E8967D">04 · WORKSPACE</text>
+
+    <text x="18" y="52" class="font-ui" font-size="15" font-weight="700" fill="#FAF9F5">Live Preview Drawer</text>
+
+    <!-- Visual Demonstration: Drawer Split miniature -->
+    <g transform="translate(18, 66)">
+      <rect width="181" height="74" rx="8" fill="#161514" stroke="#2D2B28" stroke-width="1"/>
+
+      <!-- Split Layout View -->
+      <g transform="translate(10, 10)">
+        <!-- Left editor miniature -->
+        <rect x="0" y="0" width="76" height="54" rx="4" fill="#21201E" stroke="#33312D" stroke-width="0.8"/>
+        <line x1="8" y1="12" x2="48" y2="12" stroke="#52AD68" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="8" y1="20" x2="62" y2="20" stroke="#7D7971" stroke-width="1" stroke-linecap="round"/>
+        <line x1="8" y1="28" x2="54" y2="28" stroke="#7D7971" stroke-width="1" stroke-linecap="round"/>
+        <line x1="8" y1="36" x2="38" y2="36" stroke="#D97757" stroke-width="1" stroke-linecap="round"/>
+
+        <!-- Split Divider -->
+        <line x1="81" y1="4" x2="81" y2="50" stroke="#D97757" stroke-width="1.2" stroke-dasharray="2 2"/>
+
+        <!-- Right drawer miniature (460px) -->
+        <rect x="86" y="0" width="75" height="54" rx="4" fill="#282623" stroke="#D97757" stroke-width="1"/>
+        <!-- URL bar miniature -->
+        <rect x="90" y="5" width="67" height="8" rx="2" fill="#161514"/>
+        <circle cx="94" cy="9" r="1.5" fill="#52AD68"/>
+        <line x1="98" y1="9" x2="132" y2="9" stroke="#6A665E" stroke-width="1"/>
+        
+        <!-- Live App Content miniature -->
+        <rect x="90" y="17" width="31" height="14" rx="2" fill="#383530"/>
+        <rect x="126" y="17" width="31" height="14" rx="2" fill="#383530"/>
+        <rect x="90" y="35" width="67" height="14" rx="2" fill="#D97757" fill-opacity="0.3"/>
+      </g>
+    </g>
+
+    <!-- Description -->
+    <text x="18" y="162" class="font-ui" font-size="10.5" fill="#B4B0A5">
+      460px slide-out drawer with dynamic
+    </text>
+    <text x="18" y="177" class="font-ui" font-size="10.5" fill="#B4B0A5">
+      URL routing &amp; live iframe reload.
+    </text>
+    <text x="18" y="196" class="font-mono" font-size="9" fill="#D97757">
+      Built-in dev server preview
+    </text>
+  </g>
+
+</svg>
