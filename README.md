@@ -20,9 +20,10 @@
 - [🌟 Desglose Exhaustivo de Características (Feature Breakdown)](#-desglose-exhaustivo-de-características-feature-breakdown)
 - [⌨️ Atajos de Teclado y Controles Rápidos](#️-atajos-de-teclado-y-controles-rápidos)
 - [🚀 Guía de Instalación y Puesta en Marcha](#-guía-de-instalación-y-puesta-en-marcha)
-  - [Método Oficial: CLI de DeepSeek Harness](#método-oficial-cli-de-deepseek-harness)
-  - [Método Alternativo: Parche Cordis (`patch.yml`)](#método-alternativo-parche-cordis-patchyml)
-  - [Método Rápido: Inyección en Caliente (Hot Injection en Navegador)](#método-rápido-inyección-en-caliente-hot-injection-en-navegador)
+  - [Método 1: Instalación Visual desde DeepSeek Harness Web/Desktop GUI (Recomendado)](#método-1-instalación-visual-desde-deepseek-harness-webdesktop-gui-recomendado)
+  - [Método 2: CLI Oficial de DeepSeek Harness](#método-2-cli-oficial-de-deepseek-harness)
+  - [Método 3: Parche Cordis Manual (`cordis.patch.yml`)](#método-3-parche-cordis-manual-cordispatchyml--claude-desktoppatchyml)
+  - [Método 4: Inyección en Caliente (Hot Injection en Navegador)](#método-4-inyección-en-caliente-hot-injection-en-navegador)
 - [📚 Tutorial Paso a Paso Ilustrado](#-tutorial-paso-a-paso-ilustrado)
 - [📁 Estructura del Repositorio](#-estructura-del-repositorio)
 - [🛠️ Compilación, Tipado y Control de Calidad](#️-compilación-tipado-y-control-de-calidad)
@@ -133,18 +134,34 @@ Inspirado en la impresión editorial clásica, el modo claro utiliza un fondo co
 
 ## 🚀 Guía de Instalación y Puesta en Marcha
 
-### Método Oficial: CLI de DeepSeek Harness
+### Método 1: Instalación Visual desde DeepSeek Harness Web/Desktop GUI (Recomendado)
 
-La forma estándar y recomendada para instalar y registrar el plugin en DeepSeek Harness es mediante el gestor de plugins CLI:
+El paquete está oficialmente certificado y declarado como un **Cordis Bundle** estándar en su manifiesto `package.json` (`bundle.patch: "./cordis.patch.yml"` y `dsh.bundle.patch: "./cordis.patch.yml"`). Esto permite que el instalador integrado de DeepSeek Harness descargue, active e inyecte el parche automáticamente sin tocar la consola de comandos:
+
+1. Inicie la aplicación web o de escritorio de DeepSeek Harness.
+2. Navegue a **Settings** (Configuración) en la barra de navegación o menú lateral.
+3. Diríjase a la sección **Plugin Hub / Market** (Tienda de Plugins).
+4. Haga clic en la opción **Install from Git** (o *Add Custom Plugin*).
+5. Ingrese la URL del repositorio oficial:
+   ```text
+   https://github.com/Dreftian/dsh-claude-code-desktop
+   ```
+6. Haga clic en **Install / Enable**. DeepSeek Harness detectará el archivo [`cordis.patch.yml`](./cordis.patch.yml), vinculará el bundle al runtime Cordis y recargará la interfaz transformándola de inmediato en **Claude Code Desktop GUI**.
+
+---
+
+### Método 2: CLI Oficial de DeepSeek Harness
+
+La forma estándar y recomendada para instalar y registrar el plugin mediante consola es a través del gestor de plugins CLI de DeepSeek Harness:
 
 ```bash
 # Opción 1: Instalar directamente desde GitHub
 dsh plugin --profile web add https://github.com/Dreftian/dsh-claude-code-desktop
 
-# Opción 2: Usar con npx
+# Opción 2: Usar con npx (sin instalación global de dsh)
 npx @deepseek-ai/dsh plugin --profile web add https://github.com/Dreftian/dsh-claude-code-desktop
 
-# Opción 3: Desarrollo local
+# Opción 3: Desarrollo local (apuntando al directorio del plugin)
 dsh plugin --profile web add ./dsh-claude-code-desktop
 ```
 
@@ -158,15 +175,16 @@ npx @deepseek-ai/dsh web
 
 ---
 
-### Método Alternativo: Parche Cordis (`patch.yml`)
+### Método 3: Parche Cordis Manual (`cordis.patch.yml` / `claude-desktop.patch.yml`)
 
 Si gestiona su entorno mediante parches declarativos de Cordis:
 
 ```bash
 pnpm dsh web --patch ./claude-desktop.patch.yml
 ```
+*(O alternativamente `./cordis.patch.yml`)*
 
-Contenido del manifiesto [`claude-desktop.patch.yml`](./claude-desktop.patch.yml):
+Contenido del manifiesto [`cordis.patch.yml`](./cordis.patch.yml) / [`claude-desktop.patch.yml`](./claude-desktop.patch.yml):
 
 ```yaml
 - insert:
@@ -183,7 +201,7 @@ plugins:
 
 ---
 
-### Método Rápido: Inyección en Caliente (Hot Injection en Navegador)
+### Método 4: Inyección en Caliente (Hot Injection en Navegador)
 
 Ideal para probar de forma inmediata el diseño en una instancia en ejecución (por ejemplo, `http://127.0.0.1:3080` o `http://localhost:3080`) sin reiniciar servidores ni reconstruir paquetes.
 
@@ -227,11 +245,11 @@ Siga este flujo de 4 pasos para configurar, ejecutar y disfrutar de la experienc
 ![Flujo de Trabajo Paso a Paso](assets/tutorial-flow.svg)
 
 ### Paso 1: Instalación del Plugin
-Instale el paquete en el perfil web de DeepSeek Harness utilizando el comando CLI de su preferencia:
+Instale el paquete en el perfil web de DeepSeek Harness utilizando la interfaz gráfica (Settings -> Plugin Hub) o el comando CLI:
 ```bash
 dsh plugin --profile web add https://github.com/Dreftian/dsh-claude-code-desktop
 ```
-Este comando clona e integra el plugin dentro de la configuración activa del runtime.
+Este paso registra el bundle y prepara el runtime Cordis.
 
 ### Paso 2: Lanzamiento del Servidor Web
 Inicie la interfaz gráfica de DeepSeek Harness:
@@ -261,8 +279,9 @@ dsh-claude-code-desktop/
 │   ├── desktop-ui-light.svg  # Mockup gráfico completo en Paper Light
 │   ├── tutorial-flow.svg     # Diagrama de flujo de instalación y uso en 4 pasos
 │   └── feature-matrix.svg    # Matriz visual de capacidades y componentes
+├── cordis.patch.yml          # Manifiesto Cordis Bundle para auto-instalación en UI
 ├── claude-desktop.patch.yml  # Manifiesto de parche Cordis para dsh web
-├── package.json              # Configuración del paquete y scripts npm
+├── package.json              # Configuración de paquete, bundle Cordis y scripts npm
 ├── tsconfig.json             # Configuración del compilador TypeScript (ES2022)
 ├── .gitignore                # Archivos omitidos de Git
 ├── scripts/
