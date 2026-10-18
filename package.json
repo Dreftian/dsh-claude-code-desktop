@@ -18,6 +18,7 @@
       "import": "./dist/client/index.js",
       "default": "./dist/client/index.js"
     },
+    "./package.json": "./package.json",
     "./cordis.patch.yml": "./cordis.patch.yml",
     "./claude-desktop.patch.yml": "./claude-desktop.patch.yml"
   },
@@ -28,7 +29,12 @@
     "bundle": {
       "patch": "./cordis.patch.yml"
     },
-    "client": "./src/client/index.ts"
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "platform": "web"
+    }
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
