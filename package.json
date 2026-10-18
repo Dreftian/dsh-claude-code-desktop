@@ -1,0 +1,33 @@
+{
+  "name": "dsh-claude-code-desktop",
+  "version": "1.0.0",
+  "description": "Plugin visual para DeepSeek Harness (dsh) que transforma la interfaz completa al diseño gráfico de Claude Code Desktop GUI",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client/index.ts"
+  },
+  "dsh": {
+    "client": "./src/client/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "cordis",
+    "claude-code-desktop",
+    "ui-plugin",
+    "theme"
+  ]
+}
