@@ -1,0 +1,313 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" fill="none">
+  <defs>
+    <!-- Shadows & Filters -->
+    <filter id="win-shadow-plan" x="-3%" y="-2%" width="106%" height="108%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000000" flood-opacity="0.6"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+
+    <filter id="plan-glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#D97757" flood-opacity="0.5"/>
+    </filter>
+
+    <filter id="card-elevation-plan" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+
+    <clipPath id="window-clip-plan">
+      <rect x="12" y="12" width="976" height="536" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    .font-ui { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .font-editorial { font-family: 'Newsreader', Georgia, 'Times New Roman', serif; }
+    .font-mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
+  </style>
+
+  <!-- Outside backdrop -->
+  <rect width="1000" height="560" fill="#10100F"/>
+
+  <!-- Main Window Frame with Drop Shadow -->
+  <g filter="url(#win-shadow-plan)">
+    <rect x="12" y="12" width="976" height="536" rx="14" fill="#191918" stroke="#353430" stroke-width="1.2"/>
+  </g>
+
+  <!-- Window Container -->
+  <g clip-path="url(#window-clip-plan)">
+
+    <!-- ==================== TITLEBAR ==================== -->
+    <rect x="12" y="12" width="976" height="46" fill="#161514" stroke="#2B2A27" stroke-width="1"/>
+
+    <!-- Window Dots (macOS style) -->
+    <circle cx="32" cy="35" r="5.5" fill="#ED6A5E"/>
+    <circle cx="49" cy="35" r="5.5" fill="#F5BF4F"/>
+    <circle cx="66" cy="35" r="5.5" fill="#62C554"/>
+
+    <!-- Claude Code Logo & Name -->
+    <g transform="translate(90, 24)">
+      <!-- ✻ Star Icon -->
+      <g transform="translate(6, 11) scale(0.65)" fill="#D97757">
+        <rect x="-2" y="-14" width="4" height="28" rx="2"/>
+        <rect x="-14" y="-2" width="28" height="4" rx="2"/>
+        <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(45)"/>
+        <rect x="-2" y="-14" width="4" height="28" rx="2" transform="rotate(-45)"/>
+      </g>
+      <text x="18" y="15" class="font-ui" font-size="13" font-weight="700" fill="#FAF9F5" letter-spacing="-0.01em">Claude Code</text>
+    </g>
+
+    <!-- Workspace Chip -->
+    <g transform="translate(202, 23)">
+      <rect width="112" height="24" rx="12" fill="#242321" stroke="#383632" stroke-width="1"/>
+      <circle cx="12" cy="12" r="3" fill="#D97757"/>
+      <text x="22" y="16" class="font-mono" font-size="10.5" fill="#B4B0A5">dsh · workspace</text>
+    </g>
+
+    <!-- Segmented Control [Chat | Code] -->
+    <g transform="translate(330, 22)">
+      <rect width="138" height="26" rx="6" fill="#121211" stroke="#2F2E2B" stroke-width="1"/>
+      <text x="34" y="17" class="font-ui" font-size="11" font-weight="500" fill="#7D7971" text-anchor="middle">Chat</text>
+      <rect x="70" y="2" width="65" height="22" rx="5" fill="#282725" stroke="#42403B" stroke-width="0.8"/>
+      <text x="102" y="17" class="font-ui" font-size="11" font-weight="700" fill="#FAF9F5" text-anchor="middle">Code</text>
+    </g>
+
+    <!-- Action Pills (Right Side) -->
+    <!-- Pill 1: Plan Mode (ACTIVE HIGHLIGHT IN TERRACOTTA) -->
+    <g transform="translate(540, 23)" filter="url(#plan-glow)">
+      <rect width="152" height="25" rx="12.5" fill="#D97757" fill-opacity="0.22" stroke="#D97757" stroke-width="1.4"/>
+      <text x="12" y="16" class="font-ui" font-size="11">🛡️</text>
+      <text x="30" y="16" class="font-ui" font-size="10.5" font-weight="700" fill="#FAF9F5">Plan Mode Active</text>
+      <rect x="122" y="5" width="22" height="15" rx="3" fill="#3D2820"/>
+      <text x="133" y="16" class="font-mono" font-size="8.5" font-weight="700" fill="#E8967D" text-anchor="middle">⌥P</text>
+    </g>
+
+    <!-- Pill 2: App Preview -->
+    <g transform="translate(702, 23)">
+      <rect width="112" height="25" rx="12.5" fill="#242321" stroke="#383632" stroke-width="1"/>
+      <text x="10" y="16" class="font-ui" font-size="11">⚡</text>
+      <text x="28" y="16" class="font-ui" font-size="10.5" font-weight="600" fill="#FAF9F5">App Preview</text>
+      <circle cx="98" cy="12.5" r="3" fill="#52AD68"/>
+    </g>
+
+    <!-- Pill 3: Tema Toggle -->
+    <g transform="translate(822, 23)">
+      <rect width="78" height="25" rx="12.5" fill="#242321" stroke="#3D3B37" stroke-width="1"/>
+      <text x="10" y="16" class="font-ui" font-size="11">◐</text>
+      <text x="28" y="16" class="font-ui" font-size="10.5" font-weight="500" fill="#C4C0B5">Tema</text>
+    </g>
+
+    <!-- User Profile Icon -->
+    <g transform="translate(910, 23)">
+      <circle cx="12" cy="12" r="12" fill="#2D2C29" stroke="#44423E" stroke-width="1"/>
+      <text x="12" y="16" class="font-ui" font-size="10.5" font-weight="600" fill="#E8967D" text-anchor="middle">DS</text>
+    </g>
+
+
+    <!-- ==================== LEFT SIDEBAR ==================== -->
+    <g transform="translate(12, 58)">
+      <rect width="168" height="490" fill="#141413" stroke="#252422" stroke-width="1"/>
+
+      <!-- Section: PERMISSIONS -->
+      <text x="16" y="24" class="font-mono" font-size="9.5" font-weight="700" fill="#6A665E" letter-spacing="0.08em">GUARD POLICY</text>
+
+      <g transform="translate(14, 34)">
+        <rect x="0" y="0" width="140" height="48" rx="6" fill="#261E1A" stroke="#D97757" stroke-opacity="0.4" stroke-width="1"/>
+        <text x="10" y="18" class="font-ui" font-size="10" font-weight="700" fill="#E8967D">🛡️ Safe Guard: ON</text>
+        <text x="10" y="34" class="font-mono" font-size="8" fill="#B4B0A5">Edits require confirm</text>
+      </g>
+
+      <!-- Section: PENDING ACTIONS -->
+      <text x="16" y="106" class="font-mono" font-size="9.5" font-weight="700" fill="#6A665E" letter-spacing="0.08em">PENDING REVIEWS (1)</text>
+
+      <g transform="translate(14, 116)">
+        <rect x="0" y="0" width="140" height="34" rx="6" fill="#21201E" stroke="#383632" stroke-width="1"/>
+        <circle cx="12" cy="17" r="3.5" fill="#D97757"/>
+        <text x="22" y="16" class="font-mono" font-size="9.5" font-weight="600" fill="#FAF9F5">theme-dispatcher</text>
+        <text x="22" y="27" class="font-mono" font-size="8" fill="#E8967D">+3 lines / -1 line</text>
+      </g>
+
+      <!-- Section: HOTKEY CONTROLS -->
+      <text x="16" y="174" class="font-mono" font-size="9.5" font-weight="700" fill="#6A665E" letter-spacing="0.08em">KEY SHORTCUTS</text>
+
+      <g transform="translate(14, 184)">
+        <rect x="0" y="0" width="140" height="52" rx="6" fill="#1A1918" stroke="#2E2C29" stroke-width="1"/>
+        
+        <rect x="8" y="8" width="56" height="16" rx="3" fill="#252422" stroke="#3D3B37" stroke-width="0.8"/>
+        <text x="36" y="19.5" class="font-mono" font-size="8" font-weight="700" fill="#E8967D" text-anchor="middle">Shift+Tab</text>
+        <text x="70" y="19.5" class="font-ui" font-size="8.5" fill="#A39F95">Toggle Mode</text>
+
+        <rect x="8" y="28" width="34" height="16" rx="3" fill="#252422" stroke="#3D3B37" stroke-width="0.8"/>
+        <text x="25" y="39.5" class="font-mono" font-size="8" font-weight="700" fill="#52AD68" text-anchor="middle">Enter</text>
+        <text x="48" y="39.5" class="font-ui" font-size="8.5" fill="#A39F95">Approve Diff</text>
+      </g>
+
+      <!-- Bottom Settings Item -->
+      <line x1="12" y1="440" x2="156" y2="440" stroke="#252422" stroke-width="1"/>
+      <g transform="translate(14, 452)">
+        <text x="8" y="16" class="font-ui" font-size="12">⚙️</text>
+        <text x="26" y="16" class="font-ui" font-size="11" font-weight="500" fill="#FAF9F5">Policy Config</text>
+        <text x="134" y="16" class="font-mono" font-size="9" fill="#6A665E" text-anchor="end">v0.1.0</text>
+      </g>
+    </g>
+
+
+    <!-- ==================== MAIN WORKSPACE (PLAN REVIEW) ==================== -->
+    <g transform="translate(180, 58)">
+      <rect width="808" height="490" fill="#191918"/>
+
+      <!-- Plan Mode Top Guard Banner -->
+      <g transform="translate(24, 16)">
+        <rect width="760" height="38" rx="8" fill="#2A1E19" stroke="#D97757" stroke-width="1.2"/>
+        <text x="16" y="23" class="font-ui" font-size="13">🛡️</text>
+        <text x="36" y="23" class="font-ui" font-size="11.5" font-weight="700" fill="#F4957A">
+          PLAN MODE GUARD ACTIVE:
+        </text>
+        <text x="194" y="23" class="font-ui" font-size="11" fill="#D2CEC4">
+          All code rewrites, filesystem updates, and bash commands are held for your explicit approval.
+        </text>
+
+        <!-- Shortcut pill on right of banner -->
+        <g transform="translate(636, 9)">
+          <rect width="112" height="20" rx="4" fill="#3D2820" stroke="#D97757" stroke-opacity="0.6" stroke-width="0.8"/>
+          <text x="56" y="13.5" class="font-mono" font-size="9" font-weight="700" fill="#E8967D" text-anchor="middle">Press Shift + Tab</text>
+        </g>
+      </g>
+
+      <!-- Assistant Editorial Intro -->
+      <g transform="translate(24, 68)">
+        <!-- Claude Avatar -->
+        <circle cx="12" cy="12" r="12" fill="#3D2820" stroke="#D97757" stroke-opacity="0.4" stroke-width="1"/>
+        <text x="12" y="16.5" class="font-ui" font-size="12" font-weight="700" fill="#D97757" text-anchor="middle">✻</text>
+        <text x="32" y="15" class="font-ui" font-size="12" font-weight="700" fill="#FAF9F5">Claude</text>
+        <text x="76" y="15" class="font-mono" font-size="9.5" fill="#E8967D">3.7 Sonnet</text>
+        <text x="146" y="15" class="font-mono" font-size="9.5" fill="#65625B">Plan Mode Review Session</text>
+
+        <text x="0" y="38" class="font-editorial" font-size="13.5" fill="#D2CEC4">
+          I have prepared the editorial theme configuration for DeepSeek Harness.
+        </text>
+        <text x="0" y="55" class="font-editorial" font-size="13.5" fill="#D2CEC4">
+          Review the precise unified diff below. Nothing will be committed to disk until you approve:
+        </text>
+      </g>
+
+      <!-- Tool Call Diff Review Card (.cc-upgraded-tool-card) -->
+      <g transform="translate(24, 142)" filter="url(#card-elevation-plan)">
+        <!-- Card Body -->
+        <rect width="760" height="258" rx="10" fill="#21201E" stroke="#3D3B37" stroke-width="1"/>
+        <rect x="0" y="0" width="5" height="258" rx="2" fill="#D97757"/>
+
+        <!-- Card Header -->
+        <g transform="translate(18, 14)">
+          <text x="0" y="14" class="font-ui" font-size="12">📝</text>
+          <text x="20" y="14" class="font-mono" font-size="11" font-weight="700" fill="#FAF9F5">
+            File Modification: src/core/theme-dispatcher.ts
+          </text>
+
+          <rect x="360" y="0" width="100" height="20" rx="10" fill="#30231D" stroke="#D97757" stroke-opacity="0.6" stroke-width="0.8"/>
+          <circle cx="370" cy="10" r="3" fill="#D97757"/>
+          <text x="378" y="13.5" class="font-mono" font-size="9" font-weight="600" fill="#E8967D">Awaiting Review</text>
+
+          <text x="724" y="14" class="font-mono" font-size="9.5" fill="#7D7971" text-anchor="end">Diff (Unified)</text>
+        </g>
+
+        <!-- Diff Viewer Window -->
+        <g transform="translate(16, 42)">
+          <rect width="728" height="152" rx="6" fill="#141413" stroke="#2B2A27" stroke-width="1"/>
+
+          <!-- Diff Header Line -->
+          <rect width="728" height="22" rx="6" fill="#1A1918"/>
+          <rect x="0" y="14" width="728" height="8" fill="#1A1918"/>
+          <text x="12" y="15" class="font-mono" font-size="9" fill="#8C887F">
+            @@ -42,6 +42,9 @@ export function registerEditorialTheme(ctx: Context) {
+          </text>
+          <line x1="0" y1="22" x2="728" y2="22" stroke="#282623" stroke-width="1"/>
+
+          <!-- Line 1: Context -->
+          <g transform="translate(12, 38)">
+            <text x="0" y="0" class="font-mono" font-size="9.5" fill="#6A665E">42</text>
+            <text x="20" y="0" class="font-mono" font-size="9.5" fill="#6A665E">42</text>
+            <text x="46" y="0" class="font-mono" font-size="9.5" fill="#A39F95">  const logger = ctx.logger('claude-desktop');</text>
+          </g>
+
+          <!-- Line 2: Removed line (Red) -->
+          <g transform="translate(0, 48)">
+            <rect width="728" height="18" fill="#3B1C1C" fill-opacity="0.6"/>
+            <text x="12" y="13" class="font-mono" font-size="9.5" fill="#EF4444">43</text>
+            <text x="32" y="13" class="font-mono" font-size="9.5" fill="#EF4444">  </text>
+            <text x="46" y="13" class="font-mono" font-size="9.5" fill="#F87171">-  const currentTheme = 'legacy-cli-mode';</text>
+          </g>
+
+          <!-- Line 3: Added line 1 (Green) -->
+          <g transform="translate(0, 68)">
+            <rect width="728" height="18" fill="#162D1C" fill-opacity="0.6"/>
+            <text x="12" y="13" class="font-mono" font-size="9.5" fill="#52AD68">  </text>
+            <text x="32" y="13" class="font-mono" font-size="9.5" fill="#52AD68">43</text>
+            <text x="46" y="13" class="font-mono" font-size="9.5" fill="#4ADE80">+  const currentTheme = 'claude-desktop-editorial';</text>
+          </g>
+
+          <!-- Line 4: Added line 2 (Green) -->
+          <g transform="translate(0, 88)">
+            <rect width="728" height="18" fill="#162D1C" fill-opacity="0.6"/>
+            <text x="12" y="13" class="font-mono" font-size="9.5" fill="#52AD68">  </text>
+            <text x="32" y="13" class="font-mono" font-size="9.5" fill="#52AD68">44</text>
+            <text x="46" y="13" class="font-mono" font-size="9.5" fill="#4ADE80">+  await injectDesignTokens({ base: '#191918', accent: '#D97757', paper: '#FAF9F5' });</text>
+          </g>
+
+          <!-- Line 5: Added line 3 (Green) -->
+          <g transform="translate(0, 108)">
+            <rect width="728" height="18" fill="#162D1C" fill-opacity="0.6"/>
+            <text x="12" y="13" class="font-mono" font-size="9.5" fill="#52AD68">  </text>
+            <text x="32" y="13" class="font-mono" font-size="9.5" fill="#52AD68">45</text>
+            <text x="46" y="13" class="font-mono" font-size="9.5" fill="#4ADE80">+  setupKeybindings({ togglePlanMode: 'Shift+Tab', openDrawer: 'Meta+B' });</text>
+          </g>
+
+          <!-- Line 6: Context -->
+          <g transform="translate(12, 138)">
+            <text x="0" y="0" class="font-mono" font-size="9.5" fill="#6A665E">44</text>
+            <text x="20" y="0" class="font-mono" font-size="9.5" fill="#6A665E">46</text>
+            <text x="46" y="0" class="font-mono" font-size="9.5" fill="#A39F95">  return { status: 'ready', port: 3080 };</text>
+          </g>
+        </g>
+
+        <!-- Action Review Buttons inside the Card -->
+        <g transform="translate(16, 204)">
+          <!-- Reject Button -->
+          <rect x="0" y="6" width="130" height="34" rx="6" fill="#242120" stroke="#5E2F2F" stroke-width="1"/>
+          <text x="65" y="27" class="font-ui" font-size="11" font-weight="600" fill="#F87171" text-anchor="middle">
+            ✕ Reject Edit (Esc)
+          </text>
+
+          <!-- Modify / Feedback Button -->
+          <rect x="142" y="6" width="138" height="34" rx="6" fill="#242321" stroke="#3D3B37" stroke-width="1"/>
+          <text x="211" y="27" class="font-ui" font-size="11" font-weight="600" fill="#B4B0A5" text-anchor="middle">
+            💬 Revise Plan (E)
+          </text>
+
+          <!-- Approve Button (Prominent Terracotta Action) -->
+          <g transform="translate(488, 6)" filter="url(#plan-glow)">
+            <rect width="240" height="34" rx="6" fill="#D97757"/>
+            <text x="120" y="22" class="font-ui" font-size="12" font-weight="700" fill="#FAF9F5" text-anchor="middle">
+              ✔ Approve &amp; Apply Changes (↵)
+            </text>
+          </g>
+        </g>
+      </g>
+
+      <!-- Bottom Status Pill & Hotkey Reminder -->
+      <g transform="translate(24, 420)">
+        <rect width="760" height="46" rx="10" fill="#1C1B19" stroke="#2F2D2A" stroke-width="1"/>
+        
+        <circle cx="20" cy="23" r="4" fill="#52AD68"/>
+        <text x="32" y="27" class="font-mono" font-size="10.5" fill="#FAF9F5">
+          Guarded Sandbox: 0 unauthorized writes performed
+        </text>
+
+        <rect x="548" y="11" width="198" height="24" rx="5" fill="#262421" stroke="#3D3A35" stroke-width="0.8"/>
+        <text x="647" y="26.5" class="font-ui" font-size="10" font-weight="600" fill="#E8967D" text-anchor="middle">
+          ⚡ Shift + Tab = Auto-Accept
+        </text>
+      </g>
+    </g>
+
+  </g>
+</svg>

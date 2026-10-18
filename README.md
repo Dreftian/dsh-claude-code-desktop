@@ -60,7 +60,46 @@ Para probar la interfaz al instante en `http://127.0.0.1:3080` sin reiniciar:
 
 ## 🖼️ Interfaz y Controles
 
-![Claude Code Desktop GUI](assets/desktop-ui-dark.svg)
+### 🔄 Paginación Automática en Vivo
+> *El siguiente visor cambia automáticamente de pantalla cada 4 segundos mostrando las vistas reales del plugin en DeepSeek Harness:*
+
+![Carrusel Automático de la Interfaz](assets/ui-carousel.svg)
+
+---
+
+### 📑 Vistas y Pantallas Individuales (Paginación Manual)
+
+<details open>
+<summary><b>🌙 1. Anthropic Dark Workstation (#191918)</b></summary>
+<p>Espacio de trabajo principal con contraste cálido, paleta Anthropic Dark, tipografía editorial Newsreader para el asistente y tarjetas de herramientas elevadas.</p>
+
+![Anthropic Dark Workstation](assets/desktop-ui-dark.svg)
+</details>
+
+<details>
+<summary><b>☀️ 2. Paper Light Editorial Mode (#FAF9F5)</b></summary>
+<p>Modo de lectura claro inspirado en publicaciones de imprenta sobre papel natural cálido con tipografía carbón de alto confort visual.</p>
+
+![Paper Light Editorial Mode](assets/desktop-ui-light.svg)
+</details>
+
+<details>
+<summary><b>⚡ 3. Live App Preview Drawer (Split Testing 460px)</b></summary>
+<p>Panel deslizable de 460px con navegador web e iframe interactivo para depurar y visualizar aplicaciones locales (<code>http://localhost:3000</code>) en tiempo real.</p>
+
+![Live App Preview Drawer](assets/desktop-ui-preview.svg)
+</details>
+
+<details>
+<summary><b>🛡️ 4. Plan Mode & Inspección de Diffs (Shift + Tab)</b></summary>
+<p>Modo interactivo de ejecución protegida. Permite revisar planes paso a paso y previsualizar diffs antes de aplicar cambios en código con el atajo <code>Shift + Tab</code>.</p>
+
+![Plan Mode & Inspección de Diffs](assets/desktop-ui-plan.svg)
+</details>
+
+---
+
+### ⌨️ Atajos y Acciones Rápidas
 
 | Control / Atajo | Acción |
 | :--- | :--- |
